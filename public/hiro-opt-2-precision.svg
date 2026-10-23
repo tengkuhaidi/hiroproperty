@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="100%" height="100%">
+  <!-- Transparent Background -->
+
+  <!-- ICON (LEFT): The Oris-Refined Precision Hexagon & Minimalist H -->
+  <g transform="translate(65, 45)">
+    <!-- Outer Precision Hexagonal Facet -->
+    <path d="M 70 12 L 128 45 L 128 112 L 70 145 L 12 112 L 12 45 Z" 
+          fill="none" stroke="#0F172A" stroke-width="3" stroke-linejoin="round" />
+    
+    <!-- Fine-line Accent Ring (Warm Champagne Gold) -->
+    <path d="M 70 20 L 120 49 L 120 107 L 70 136 L 20 107 L 20 49 Z" 
+          fill="none" stroke="#C59B27" stroke-width="2" stroke-linejoin="round" opacity="0.6" />
+
+    <!-- Pure Minimalist 'H' formed by Interior Negative Space & Two Slender Pylons -->
+    <!-- Left Pylon -->
+    <rect x="42" y="46" width="12" height="66" rx="2" fill="#0F172A" />
+    
+    <!-- Right Pylon -->
+    <rect x="86" y="46" width="12" height="66" rx="2" fill="#0F172A" />
+
+    <!-- Center Bridge (Gold Key) -->
+    <rect x="54" y="73" width="32" height="12" fill="#C59B27" />
+  </g>
+
+  <!-- TYPOGRAPHY (RIGHT): Editorial Sans Lockup -->
+  <g transform="translate(255, 138)">
+    <text x="0" y="0" 
+          font-family="'Inter', -apple-system, sans-serif" 
+          font-size="76" 
+          font-weight="800" 
+          letter-spacing="-0.03em" 
+          fill="#0F172A">HIRO</text>
+
+    <text x="245" y="0" 
+          font-family="'Inter', -apple-system, sans-serif" 
+          font-size="76" 
+          font-weight="300" 
+          letter-spacing="0.14em" 
+          fill="#475569">PROPERTY</text>
+
+    <!-- Clean Line -->
+    <line x1="248" y1="20" x2="650" y2="20" stroke="#E2E8F0" stroke-width="1.5" />
+    <text x="248" y="38" 
+          font-family="'Inter', sans-serif" 
+          font-size="10.5" 
+          font-weight="600" 
+          letter-spacing="0.36em" 
+          fill="#94A3B8">CURATED ESTATES &gt; IDR 6B</text>
+  </g>
+</svg>

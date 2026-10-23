@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="100%" height="100%">
+  <!-- Transparent Background -->
+
+  <!-- ICON (LEFT): Monogram 'H' Isometric Architectural Frame -->
+  <g transform="translate(60, 45)">
+    <!-- Baseline Shadow / Ground Plane -->
+    <path d="M 15 135 L 75 148 L 135 135" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" />
+
+    <!-- Left Pillar (Solid Navy, Crisp Facet) -->
+    <polygon points="25,40 45,28 45,130 25,130" fill="#0A1118" />
+    <polygon points="45,28 55,34 55,130 45,130" fill="#1E293B" />
+
+    <!-- Right Pillar (Solid Navy, Crisp Facet) -->
+    <polygon points="95,40 115,28 115,130 95,130" fill="#0A1118" />
+    <polygon points="115,28 125,34 125,130 115,130" fill="#1E293B" />
+
+    <!-- Dynamic Architectural Lintel / Crossbeam in Warm Gold (Oris Tone) -->
+    <!-- The horizontal connection that forms the H, angled with a roof pitch -->
+    <polygon points="45,68 75,50 105,68 105,82 75,64 45,82" fill="#C59B27" />
+    <polygon points="75,50 105,68 105,74 75,56" fill="#DFB743" />
+    
+    <!-- Modern Minimalist Gabled Apex (Subtle Overhanging Roof Edge) -->
+    <polyline points="20,44 75,12 130,44" fill="none" stroke="#C59B27" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- TYPOGRAPHY (RIGHT): World-Class Luxury Typography -->
+  <g transform="translate(250, 138)">
+    <!-- HIRO: Bold, Geometric, Deep Slate-Navy -->
+    <text x="0" y="0" 
+          font-family="'Inter', 'Montserrat', -apple-system, sans-serif" 
+          font-size="78" 
+          font-weight="900" 
+          letter-spacing="-0.04em" 
+          fill="#0A1118">HIRO</text>
+
+    <!-- PROPERTY: Precision Light, High Tracking -->
+    <text x="250" y="0" 
+          font-family="'Inter', 'Montserrat', -apple-system, sans-serif" 
+          font-size="78" 
+          font-weight="300" 
+          letter-spacing="0.12em" 
+          fill="#64748B">PROPERTY</text>
+
+    <!-- Sub-descriptor: Clean Fine-Print -->
+    <text x="254" y="32" 
+          font-family="'Inter', sans-serif" 
+          font-size="11" 
+          font-weight="600" 
+          letter-spacing="0.38em" 
+          fill="#94A3B8">PRIVATE ADVISORY &#183; JAKARTA &#183; BALI</text>
+  </g>
+</svg>
