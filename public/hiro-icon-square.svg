@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldSquare" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCEBA4" />
+      <stop offset="40%" stop-color="#D4AF37" />
+      <stop offset="75%" stop-color="#AA771C" />
+      <stop offset="100%" stop-color="#80550B" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="32" fill="#090a0b" />
+  <rect x="16" y="16" width="480" height="480" rx="24" fill="none" stroke="url(#goldSquare)" stroke-width="2.5" stroke-opacity="0.4" />
+
+  <!-- Monogram Elements Centered -->
+  <g transform="translate(136, 120)">
+    <!-- Roof Gable Line -->
+    <path d="M 40 50 L 120 10 L 200 50" fill="none" stroke="url(#goldSquare)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Left Pillar -->
+    <rect x="48" y="60" width="24" height="135" rx="2" fill="url(#goldSquare)" />
+    
+    <!-- Right Pillar -->
+    <rect x="168" y="60" width="24" height="135" rx="2" fill="url(#goldSquare)" />
+    
+    <!-- Center Beam -->
+    <line x1="68" y1="125" x2="172" y2="125" stroke="url(#goldSquare)" stroke-width="10" stroke-linecap="square" />
+    
+    <!-- Foundation Line -->
+    <line x1="28" y1="210" x2="212" y2="210" stroke="url(#goldSquare)" stroke-width="4.5" stroke-linecap="round" />
+
+    <!-- Center Diamond Key -->
+    <polygon points="120,114 128,125 120,136 112,125" fill="#FCEBA4" />
+  </g>
+
+  <!-- Wordmark Bottom -->
+  <text x="256" y="415" font-family="'Playfair Display', Georgia, serif" font-size="44" font-weight="700" letter-spacing="0.25em" fill="url(#goldSquare)" text-anchor="middle">HIRO</text>
+  <text x="256" y="445" font-family="'Inter', sans-serif" font-size="12" font-weight="500" letter-spacing="0.45em" fill="#8a919e" text-anchor="middle">PROPERTY</text>
+</svg>

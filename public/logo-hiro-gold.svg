@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="100%" height="100%">
+  <defs>
+    <!-- Premium Linear Gold Gradient -->
+    <linearGradient id="hiroGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCEBA4" />
+      <stop offset="35%" stop-color="#D4AF37" />
+      <stop offset="70%" stop-color="#AA771C" />
+      <stop offset="100%" stop-color="#80550B" />
+    </linearGradient>
+
+    <!-- Subtle Inner Glow for Monogram Frame -->
+    <linearGradient id="frameGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#AA771C" stop-opacity="0.4" />
+      <stop offset="50%" stop-color="#D4AF37" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#FCEBA4" stop-opacity="0.5" />
+    </linearGradient>
+  </defs>
+
+  <style>
+    .gold-stroke { stroke: url(#hiroGold); fill: none; }
+    .gold-fill { fill: url(#hiroGold); }
+    .serif-brand { font-family: 'Playfair Display', 'Cinzel', Georgia, serif; font-weight: 700; letter-spacing: 0.24em; }
+    .mono-sub { font-family: 'Inter', -apple-system, sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.42em; fill: #9da3ad; }
+  </style>
+
+  <!-- Deep Obsidian Background -->
+  <rect width="100%" height="100%" fill="#090a0b" />
+
+  <!-- Architectural Background Grid Accent (Subtle Precision) -->
+  <g opacity="0.15">
+    <line x1="80" y1="0" x2="80" y2="300" stroke="#ffffff" stroke-width="0.5" stroke-dasharray="4 8" />
+    <line x1="240" y1="0" x2="240" y2="300" stroke="#ffffff" stroke-width="0.5" stroke-dasharray="4 8" />
+    <line x1="0" y1="150" x2="800" y2="150" stroke="#ffffff" stroke-width="0.5" stroke-dasharray="4 8" />
+  </g>
+
+  <!-- ================= MONOGRAM MARK (LEFT) ================= -->
+  <g transform="translate(90, 70)">
+    
+    <!-- Outer Precision Geometry Box (Architectural Frame) -->
+    <rect x="0" y="0" width="160" height="160" rx="2" fill="#111215" stroke="url(#frameGrad)" stroke-width="1.8" />
+    
+    <!-- Subtle Inner Border -->
+    <rect x="8" y="8" width="144" height="144" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1" />
+
+    <!-- Isometric House Gable Line Accent (Puncak Atap Segitiga Presisi) -->
+    <path d="M 40 46 L 80 20 L 120 46" fill="none" stroke="url(#hiroGold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- The Architectural 'H' Monogram -->
+    <!-- Left Pillar (Pilar Utama Kiri) -->
+    <rect x="44" y="52" width="14" height="76" rx="1" fill="url(#hiroGold)" />
+    
+    <!-- Right Pillar (Pilar Utama Kanan) -->
+    <rect x="102" y="52" width="14" height="76" rx="1" fill="url(#hiroGold)" />
+    
+    <!-- Floating Horizontal Beam (Sinar Penghubung / Architrave) -->
+    <line x1="56" y1="88" x2="104" y2="88" stroke="url(#hiroGold)" stroke-width="6" stroke-linecap="square" />
+    
+    <!-- Foundation Baseline (Lantai Dasar Granit) -->
+    <line x1="32" y1="136" x2="128" y2="136" stroke="url(#hiroGold)" stroke-width="2.5" stroke-linecap="round" />
+
+    <!-- Subtle Center Diamond Key (Simbol Trophy Asset) -->
+    <polygon points="80,82 85,88 80,94 75,88" fill="#FCEBA4" />
+  </g>
+
+  <!-- ================= TYPOGRAPHY (RIGHT) ================= -->
+  <g transform="translate(300, 145)">
+    <!-- Brand Wordmark 'HIRO' -->
+    <text x="0" y="0" class="serif-brand gold-fill" font-size="54">HIRO</text>
+    
+    <!-- Category Definition -->
+    <text x="4" y="32" class="mono-sub">PROPERTY · PRIVATE ADVISORY</text>
+
+    <!-- Thin Divider Accent -->
+    <line x1="4" y1="46" x2="430" y2="46" stroke="#ffffff" stroke-opacity="0.15" stroke-width="1" />
+    
+    <!-- Sector Tagline -->
+    <text x="4" y="64" font-family="'Inter', sans-serif" font-size="10" font-weight="400" letter-spacing="0.22em" fill="#6f7682">
+      CURATED PRIME ESTATES &gt; IDR 6B · JAKARTA &amp; BALI
+    </text>
+  </g>
+
+</svg>
