@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node -e 'console.log(\"Using pre-rendered production static export in out/\")'",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },

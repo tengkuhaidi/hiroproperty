@@ -1,18 +1,12 @@
-import './globals.css';
 import type { Metadata } from 'next';
+import './globals.css';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'HIRO PROPERTY | Private Luxury Real Estate Advisory',
-  description: 'Curated prime properties (>IDR 6 Billion) across South Jakarta, Menteng, and Bali. Discreet acquisition, valuation, and architectural estate advisory.',
-  keywords: ['luxury real estate jakarta', 'pondok indah luxury homes', 'menteng estates', 'bali luxury villas', 'hiro property'],
-  openGraph: {
-    title: 'HIRO PROPERTY | Private Luxury Real Estate Advisory',
-    description: 'Curated prime properties (>IDR 6 Billion) in South Jakarta & Bali. Private off-market portfolio.',
-    url: 'https://hiroproperty.com',
-    siteName: 'HIRO PROPERTY',
-    locale: 'id_ID',
-    type: 'website',
-  },
+  title: 'Hiro Property — Luxury Real Estate',
+  description: 'Private-client real estate advisory for exceptional architectural homes across Jakarta, Bali, and premier international destinations.',
+  keywords: ['Luxury real estate', 'Hiro Property', 'Off-market properties', 'Jakarta luxury home', 'Bali architectural villa'],
 };
 
 export default function RootLayout({
@@ -21,14 +15,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&display=swap" 
+          rel="stylesheet" 
+        />
       </head>
-      <body className="antialiased selection:bg-[#d4af37]/30 selection:text-white">
-        {children}
+      <body className="min-h-screen bg-[#F4F1EC] text-[#14130F] font-body selection:bg-[#14130F] selection:text-[#F4F1EC]">
+        <Header />
+        <main className="min-h-screen">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
