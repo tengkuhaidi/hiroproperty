@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hiro Property — Luxury Real Estate (>IDR 6 Billion)</title>
+  
+  <!-- Typography exact to Aura Estates: Instrument Serif & Inter Tight -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#F4F1EC',      // Aura signature warm alabaster stone
+            ink: '#14130F',     // Aura deep rich architectural charcoal
+            night: '#12110E',   // Aura deep night black
+            bronze: '#9B7B4B',  // Aura refined warm bronze
+            muted: '#76736A',   // Aura secondary muted text
+            line: 'rgba(20, 19, 15, 0.12)',
+          },
+          fontFamily: {
+            display: ['"Instrument Serif"', 'Georgia', 'serif'],
+            sans: ['"Inter Tight"', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #F4F1EC;
+      color: #14130F;
+      font-family: 'Inter Tight', -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    .font-display {
+      font-family: 'Instrument Serif', Georgia, serif;
+    }
+
+    /* Smooth Drift Parallax Animation like Aura */
+    @keyframes slowDrift {
+      0% { transform: scale(1.0) translateY(0); }
+      50% { transform: scale(1.04) translateY(-1.5%); }
+      100% { transform: scale(1.0) translateY(0); }
+    }
+
+    .animate-drift {
+      animation: slowDrift 28s ease-in-out infinite;
+    }
+
+    /* Word Reveal Mask Animation */
+    .word-mask {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      padding-bottom: 0.12em;
+      margin-bottom: -0.12em;
+    }
+
+    .word-up {
+      display: inline-block;
+      transform: translateY(115%);
+      transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .word-up.revealed {
+      transform: translateY(0%);
+    }
+
+    /* Custom Input Underline Focus */
+    .input-under {
+      border-bottom: 1px solid rgba(20, 19, 15, 0.2);
+      transition: border-color 0.4s ease;
+    }
+    .input-under:focus {
+      border-color: #14130F;
+    }
+  </style>
+</head>
+<body class="selection:bg-bronze/20 selection:text-ink">
+
+  <!-- ================= HEADER (Aura Exact Dynamic Header) ================= -->
+  <header id="site-header" class="fixed inset-x-0 top-0 z-50 text-white transition-all duration-500">
+    <div class="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-7 transition-all duration-500 md:px-12">
+      <!-- Logo: Hiro Property with italic serif touch -->
+      <a class="font-display text-3xl tracking-tight" href="/">
+        Hiro<span class="italic"> Property</span>
+      </a>
+
+      <!-- Desktop Nav with hover line animation -->
+      <nav class="hidden items-center gap-12 text-sm md:flex">
+        <a class="group relative py-1" href="#residences">
+          Properties
+          <span class="absolute -bottom-1 left-0 h-px w-0 bg-current transition-all duration-500 group-hover:w-full"></span>
+        </a>
+        <a class="group relative py-1" href="#services">
+          Services
+          <span class="absolute -bottom-1 left-0 h-px w-0 bg-current transition-all duration-500 group-hover:w-full"></span>
+        </a>
+        <a class="group relative py-1" href="#architecture">
+          Architecture
+          <span class="absolute -bottom-1 left-0 h-px w-0 bg-current transition-all duration-500 group-hover:w-full"></span>
+        </a>
+        <a class="group relative py-1" href="#contact">
+          Contact
+          <span class="absolute -bottom-1 left-0 h-px w-0 bg-current transition-all duration-500 group-hover:w-full"></span>
+        </a>
+      </nav>
+
+      <!-- Action Button -->
+      <a 
+        href="https://wa.me/6287825174624?text=Halo%20Hiro%20Property,%20saya%20ingin%20konsultasi%20private%20portfolio"
+        target="_blank"
+        class="rounded-full border border-current px-5 py-2 text-xs uppercase tracking-[0.2em] transition-all hover:bg-white hover:text-night"
+      >
+        Inquire
+      </a>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION (Aura Clifftop View with Full Screen Curve) ================= -->
+  <section class="relative h-[100svh] min-h-[700px] overflow-hidden bg-night p-3 md:p-4 text-bg">
+    <!-- Rounded clipped container (Aura style 18px rounded frame) -->
+    <div class="relative h-full overflow-hidden rounded-[18px]">
+      
+      <!-- Drift background hero image (Modern Villa with Infinity Pool at Dusk) -->
+      <div class="absolute inset-0">
+        <img 
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=3840&q=80" 
+          alt="Modern luxury villa with infinity pool at dusk" 
+          class="h-full w-full object-cover animate-drift"
+        />
+        <!-- Subtle dark gradient protection for text legibility -->
+        <div class="absolute inset-0 bg-gradient-to-t from-night/90 via-night/30 to-night/40"></div>
+      </div>
+
+      <!-- Hero Main Text Stack (Bottom-aligned) -->
+      <div class="relative z-10 flex h-full flex-col justify-end p-6 md:p-14 lg:p-20">
+        
+        <p class="mb-4 text-xs uppercase tracking-[0.35em] text-bg/80 font-medium">
+          PRIVATE CLIENT REAL ESTATE &middot; &gt;IDR 6B
+        </p>
+
+        <!-- Big Display Headline with Staggered Word Reveal -->
+        <h1 class="font-display max-w-4xl text-[clamp(3.2rem,8.5vw,8.5rem)] leading-[0.92] tracking-tight">
+          <span class="word-mask"><span class="word-up">Homes&nbsp;</span></span>
+          <span class="word-mask"><span class="word-up">that&nbsp;</span></span>
+          <span class="word-mask"><span class="word-up">feel&nbsp;</span></span>
+          <span class="word-mask"><span class="word-up">like&nbsp;</span></span>
+          <span class="word-mask"><span class="word-up italic font-normal">arrival.</span></span>
+        </h1>
+
+        <!-- Category Filter & Search Bar Floating Pill Box -->
+        <div class="mt-10 flex flex-wrap items-center justify-between gap-6 border-t border-bg/20 pt-8">
+          
+          <!-- Category Pills -->
+          <div class="flex flex-wrap items-center gap-1 sm:gap-2">
+            <button class="cat-pill rounded-full px-5 py-2.5 text-sm transition-all bg-bg text-ink font-medium" data-cat="villas">
+              Villa
+            </button>
+            <button class="cat-pill rounded-full px-5 py-2.5 text-sm transition-all text-bg/85 hover:bg-bg/20" data-cat="houses">
+              House
+            </button>
+            <button class="cat-pill rounded-full px-5 py-2.5 text-sm transition-all text-bg/85 hover:bg-bg/20" data-cat="penthouses">
+              Penthouse
+            </button>
+            <button class="cat-pill rounded-full px-5 py-2.5 text-sm transition-all text-bg/85 hover:bg-bg/20" data-cat="apartments">
+              Apartment
+            </button>
+            <button class="cat-pill rounded-full px-5 py-2.5 text-sm transition-all text-bg/85 hover:bg-bg/20" data-cat="estates">
+              Estate
+            </button>
+          </div>
+
+          <!-- Direct Inquire Search Trigger -->
+          <a 
+            href="#residences"
+            id="hero-search-btn"
+            class="rounded-xl bg-bg px-7 py-3.5 text-sm font-medium text-ink transition-transform hover:scale-[1.03] shadow-lg flex items-center gap-2"
+          >
+            <span>Explore curated listings</span>
+            <span>&rarr;</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= ABOUT STATEMENT SECTION ================= -->
+  <section class="mx-auto max-w-[1600px] px-6 py-28 md:px-12 md:py-40">
+    <p class="mb-8 text-xs uppercase tracking-[0.3em] text-muted font-medium">About Hiro Property</p>
+    
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-16 items-start">
+      <div class="lg:col-span-9">
+        <h2 class="font-display text-[clamp(2.5rem,5.5vw,5rem)] leading-[1.05] tracking-tight text-ink">
+          We represent a small number of extraordinary homes &mdash; and the people who will love living in them.
+        </h2>
+      </div>
+
+      <div class="lg:col-span-3 lg:pt-4">
+        <p class="text-base text-muted leading-relaxed font-light mb-6">
+          Boutique real estate advisory independen dengan kurasi ketat aset di atas Rp 6 Miliar di Pondok Indah, Menteng, Senopati, hingga villa privat di Bali.
+        </p>
+        <a 
+          href="#residences" 
+          class="inline-flex items-center gap-2 text-sm font-medium border-b border-ink pb-1 hover:text-bronze hover:border-bronze transition-colors"
+        >
+          <span>Browse the collection</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURED RESIDENCES SECTION (Aura Exact Editorial Grid) ================= -->
+  <section id="residences" class="mx-auto max-w-[1600px] px-6 py-12 md:px-12 md:py-24 border-t border-line">
+    
+    <div class="flex items-end justify-between mb-16">
+      <div>
+        <p class="text-xs uppercase tracking-[0.3em] text-muted mb-2 font-medium">Curated Portfolio</p>
+        <h2 class="font-display text-4xl sm:text-6xl text-ink">Featured residences</h2>
+      </div>
+      <a 
+        href="https://wa.me/6287825174624?text=Halo%20Hiro%20Property,%20saya%20ingin%20katalog%20lengkap%20properti" 
+        target="_blank"
+        class="text-sm font-medium border-b border-ink pb-0.5 hover:text-bronze transition-colors hidden sm:block"
+      >
+        View all &rarr;
+      </a>
+    </div>
+
+    <!-- 3 Editorial Residence Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+      
+      <!-- Residence 1: Villa Solenne -->
+      <article class="group flex flex-col justify-between">
+        <div class="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#E6E2DA] mb-6">
+          <img 
+            src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=80" 
+            alt="Villa Solenne, Canggu Bali" 
+            class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div class="absolute top-4 left-4 bg-night/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono tracking-widest text-white uppercase">
+            EXCLUSIVE
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs text-muted mb-2 font-light">Clifftop sanctuary with a 20-meter infinity pool.</p>
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-display text-2xl text-ink group-hover:text-bronze transition-colors">Villa Solenne</h3>
+            <span class="font-display text-xl text-ink font-semibold">IDR 38.000.000.000</span>
+          </div>
+          <p class="text-xs uppercase tracking-[0.15em] text-muted mb-4 font-mono">Pererenan &middot; Canggu, Bali</p>
+          
+          <div class="pt-4 border-t border-line flex items-center justify-between text-xs text-muted font-mono">
+            <span>6 BEDS &middot; 7 BATHS</span>
+            <span>LT 1.200 m² &middot; LB 850 m²</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Residence 2: The Glass House -->
+      <article class="group flex flex-col justify-between">
+        <div class="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#E6E2DA] mb-6">
+          <img 
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80" 
+            alt="The Glass House, Bukit Golf Pondok Indah" 
+            class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div class="absolute top-4 left-4 bg-bronze text-white px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase">
+            NEW
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs text-muted mb-2 font-light">An architect's own residence, glowing at dusk.</p>
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-display text-2xl text-ink group-hover:text-bronze transition-colors">The Glass House</h3>
+            <span class="font-display text-xl text-ink font-semibold">IDR 42.500.000.000</span>
+          </div>
+          <p class="text-xs uppercase tracking-[0.15em] text-muted mb-4 font-mono">Bukit Golf &middot; Pondok Indah, Jakarta</p>
+          
+          <div class="pt-4 border-t border-line flex items-center justify-between text-xs text-muted font-mono">
+            <span>5 BEDS &middot; 5 BATHS</span>
+            <span>LT 680 m² &middot; LB 750 m²</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Residence 3: Skyline Penthouse -->
+      <article class="group flex flex-col justify-between">
+        <div class="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#E6E2DA] mb-6">
+          <img 
+            src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80" 
+            alt="Skyline Penthouse, Menteng" 
+            class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div class="absolute top-4 left-4 bg-night/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono tracking-widest text-white uppercase">
+            OFF-MARKET
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs text-muted mb-2 font-light">Full-floor colonial estate overlooking Taman Suropati.</p>
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-display text-2xl text-ink group-hover:text-bronze transition-colors">Suropati Manor</h3>
+            <span class="font-display text-xl text-ink font-semibold">IDR 75.000.000.000</span>
+          </div>
+          <p class="text-xs uppercase tracking-[0.15em] text-muted mb-4 font-mono">Menteng &middot; Jakarta Pusat</p>
+          
+          <div class="pt-4 border-t border-line flex items-center justify-between text-xs text-muted font-mono">
+            <span>6 BEDS &middot; 7 BATHS</span>
+            <span>LT 950 m² &middot; LB 620 m²</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- ================= ARCHITECTURE FIRST BANNER (Aura Exact Full Bleed) ================= -->
+  <section id="architecture" class="relative h-[80vh] min-h-[550px] overflow-hidden bg-night text-bg">
+    <img 
+      src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=3840&q=80" 
+      alt="Architectural detail" 
+      class="absolute inset-0 h-full w-full object-cover opacity-60"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-night via-night/30 to-transparent"></div>
+
+    <div class="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col justify-end px-6 py-20 md:px-12 md:py-28">
+      <p class="mb-4 text-xs uppercase tracking-[0.35em] text-bg/70 font-medium">Architecture First</p>
+      <h2 class="font-display max-w-4xl text-[clamp(2.8rem,6vw,5.5rem)] leading-[1.02]">
+        Design that earns its place on the skyline.
+      </h2>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES SECTION (Aura Exact 3-Column Accordion/Table) ================= -->
+  <section id="services" class="bg-night py-32 text-bg md:py-44">
+    <div class="mx-auto max-w-[1600px] px-6 md:px-12">
+      
+      <p class="mb-5 text-xs uppercase tracking-[0.3em] text-bg/50 font-medium">Services</p>
+      <h2 class="font-display mb-20 max-w-3xl text-5xl md:text-7xl">One advisor, every step.</h2>
+
+      <div class="border-t border-bg/15">
+        
+        <!-- Service 01: Buy -->
+        <div class="group grid items-baseline gap-4 border-b border-bg/15 py-12 transition-colors duration-500 hover:bg-bg/[0.04] md:grid-cols-12 md:px-6">
+          <span class="text-sm font-mono text-bronze md:col-span-2">01</span>
+          <h3 class="font-display text-3xl md:col-span-4 md:text-4xl">Buy</h3>
+          <p class="text-sm text-bg/70 leading-relaxed font-light md:col-span-6">
+            Off-market access, discreet viewings and a negotiator who treats your budget like their own. Pengecekan zonasi tata kota (RDTR) dan sertifikat BPN sebelum transaksi.
+          </p>
+        </div>
+
+        <!-- Service 02: Sell -->
+        <div class="group grid items-baseline gap-4 border-b border-bg/15 py-12 transition-colors duration-500 hover:bg-bg/[0.04] md:grid-cols-12 md:px-6">
+          <span class="text-sm font-mono text-bronze md:col-span-2">02</span>
+          <h3 class="font-display text-3xl md:col-span-4 md:text-4xl">Sell</h3>
+          <p class="text-sm text-bg/70 leading-relaxed font-light md:col-span-6">
+            Editorial photography, global reach and a considered launch &mdash; never a For Sale sign in sight. Tanpa spanduk publikasi, melindungi privasi penuh keluarga.
+          </p>
+        </div>
+
+        <!-- Service 03: Invest -->
+        <div class="group grid items-baseline gap-4 border-b border-bg/15 py-12 transition-colors duration-500 hover:bg-bg/[0.04] md:grid-cols-12 md:px-6">
+          <span class="text-sm font-mono text-bronze md:col-span-2">03</span>
+          <h3 class="font-display text-3xl md:col-span-4 md:text-4xl">Invest</h3>
+          <p class="text-sm text-bg/70 leading-relaxed font-light md:col-span-6">
+            Yield modelling, due diligence and portfolio strategy across Jakarta prime zones and Bali resort estates. Perlindungan pajak &amp; kepemilikan jangka panjang.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= CONTACT SECTION (Aura Exact Form Layout) ================= -->
+  <section id="contact" class="mx-auto grid max-w-[1600px] gap-16 px-6 py-32 md:grid-cols-12 md:px-12 md:py-48">
+    
+    <!-- Left Headline -->
+    <div class="md:col-span-6">
+      <p class="mb-6 text-xs uppercase tracking-[0.3em] text-muted font-medium">Get in touch</p>
+      <h2 class="font-display text-[clamp(3rem,7vw,6.5rem)] leading-[0.95]">
+        Let’s find your next address.
+      </h2>
+      <p class="mt-8 text-base text-muted max-w-md font-light leading-relaxed">
+        Apakah Anda mencari hunian peristirahatan di Bali atau kediaman utama di Jakarta Selatan, tim konsultan senior Hiro Property siap mendampingi Anda secara tertutup.
+      </p>
+    </div>
+
+    <!-- Right Minimalist Form -->
+    <div class="md:col-span-6 md:pt-8">
+      <form id="contact-form" class="space-y-6">
+        <div>
+          <input 
+            type="text" 
+            name="name" 
+            required 
+            placeholder="Full name" 
+            aria-label="Full name"
+            class="w-full input-under bg-transparent py-4 text-base outline-none placeholder:text-muted/60"
+          >
+        </div>
+        <div>
+          <input 
+            type="email" 
+            name="email" 
+            required 
+            placeholder="Email address" 
+            aria-label="Email address"
+            class="w-full input-under bg-transparent py-4 text-base outline-none placeholder:text-muted/60"
+          >
+        </div>
+        <div>
+          <input 
+            type="tel" 
+            name="phone" 
+            placeholder="Phone / WhatsApp" 
+            aria-label="Phone"
+            class="w-full input-under bg-transparent py-4 text-base outline-none placeholder:text-muted/60"
+          >
+        </div>
+        <div>
+          <textarea 
+            name="message" 
+            rows="3" 
+            placeholder="How can we help? (e.g. Inquiring for Pondok Indah / Bali Villa >10B)" 
+            aria-label="Message"
+            class="w-full input-under bg-transparent py-4 text-base outline-none placeholder:text-muted/60 resize-none"
+          ></textarea>
+        </div>
+
+        <button 
+          type="submit"
+          class="w-full rounded-full bg-ink px-8 py-5 text-sm uppercase tracking-[0.2em] text-bg transition-transform hover:scale-[1.01] active:scale-[0.99]"
+        >
+          Send enquiry &rarr;
+        </button>
+
+        <p class="text-center text-xs text-muted font-mono pt-2">
+          Strictly confidential. Protected under Family Office Real Estate NDA.
+        </p>
+      </form>
+    </div>
+
+  </section>
+
+  <!-- ================= FOOTER (Aura Exact Architecture) ================= -->
+  <footer class="border-t border-line bg-bg py-20">
+    <div class="mx-auto max-w-[1600px] px-6 md:px-12">
+      
+      <div class="grid gap-12 md:grid-cols-12 pb-16 border-b border-line">
+        
+        <div class="md:col-span-5">
+          <a class="font-display text-4xl tracking-tight text-ink" href="/">
+            Hiro<span class="italic"> Property</span>
+          </a>
+          <p class="mt-4 text-sm text-muted max-w-sm leading-relaxed font-light">
+            Private-client real estate advisory for exceptional homes across Jakarta and Bali (&gt;IDR 6 Billion).
+          </p>
+        </div>
+
+        <div class="md:col-span-3">
+          <p class="text-xs uppercase tracking-[0.25em] text-muted mb-4 font-mono">EXPLORE</p>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#residences" class="hover:text-bronze transition-colors">All properties</a></li>
+            <li><a href="#services" class="hover:text-bronze transition-colors">Services</a></li>
+            <li><a href="#architecture" class="hover:text-bronze transition-colors">Architecture</a></li>
+            <li><a href="#contact" class="hover:text-bronze transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-4">
+          <p class="text-xs uppercase tracking-[0.25em] text-muted mb-4 font-mono">OFFICE</p>
+          <p class="text-sm leading-relaxed text-ink">
+            Jl. Panglima Polim / Senopati, Kebayoran Baru<br>
+            Jakarta Selatan 12160, Indonesia<br>
+            <a href="mailto:private@hiroproperty.com" class="text-bronze hover:underline">private@hiroproperty.com</a>
+          </p>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-xs text-muted">
+        <div>&copy; 2026 Hiro Property &middot; PT Hiro Properti Indonesia. All rights reserved.</div>
+        <div>Curated Luxury Real Estate Portal</div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================= INTERACTIVE CONTROLLER ================= -->
+  <script>
+    (function() {
+      // 1. Dynamic Header Appearance on Scroll
+      var header = document.getElementById('site-header');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 80) {
+          header.classList.add('bg-night/95', 'backdrop-blur-md', 'shadow-md', 'py-4');
+          header.classList.remove('py-7');
+        } else {
+          header.classList.remove('bg-night/95', 'backdrop-blur-md', 'shadow-md', 'py-4');
+          header.classList.add('py-7');
+        }
+      });
+
+      // 2. Headline Words Staggered Reveal
+      setTimeout(function() {
+        var wordSpans = document.querySelectorAll('.word-up');
+        wordSpans.forEach(function(sp, idx) {
+          setTimeout(function() {
+            sp.classList.add('revealed');
+          }, idx * 120);
+        });
+      }, 250);
+
+      // 3. Category Pills Selection
+      var pills = document.querySelectorAll('.cat-pill');
+      var searchBtn = document.getElementById('hero-search-btn');
+      pills.forEach(function(p) {
+        p.addEventListener('click', function() {
+          pills.forEach(function(x) {
+            x.classList.remove('bg-bg', 'text-ink');
+            x.classList.add('text-bg/85', 'hover:bg-bg/20');
+          });
+          p.classList.remove('text-bg/85', 'hover:bg-bg/20');
+          p.classList.add('bg-bg', 'text-ink');
+          var catName = p.getAttribute('data-cat') || 'properties';
+          searchBtn.textContent = 'Search ' + catName + ' \u2192';
+        });
+      });
+
+      // 4. Contact Form Submission via WhatsApp
+      var form = document.getElementById('contact-form');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var name = form.name.value;
+          var email = form.email.value;
+          var phone = form.phone.value;
+          var msg = form.message.value;
+          var text = encodeURIComponent(
+            "Halo Hiro Property,\n\nNama: " + name + "\nEmail: " + email + "\nWhatsApp: " + phone + "\nPesan: " + msg + "\n\nMohon informasi konsultasi properti privat."
+          );
+          window.open("https://wa.me/6287825174624?text=" + text, '_blank');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
