@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SmoothScrollProvider from '@/components/motion/SmoothScrollProvider';
 
 export const metadata: Metadata = {
   title: 'Hiro Property — Luxury Real Estate',
@@ -25,11 +26,13 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#F4F1EC] text-[#14130F] font-body selection:bg-[#14130F] selection:text-[#F4F1EC]">
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+        <SmoothScrollProvider>
+          <Header />
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+        </SmoothScrollProvider>
       </body>
     </html>
   );
