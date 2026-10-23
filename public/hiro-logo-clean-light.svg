@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 200" width="100%" height="100%">
+  <defs>
+    <!-- Muted warm bronze gold (exact Oris tone) -->
+    <linearGradient id="orisGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5C158" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#C29B29" />
+    </linearGradient>
+  </defs>
+
+  <style>
+    .navy-text { fill: #0F172A; }
+    .gold-stroke { stroke: url(#orisGold); fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+
+  <!-- Clean Transparent Canvas -->
+
+  <!-- ICON (LEFT): Geometric House Monogram 'H' in Oris Line-Art Style -->
+  <g transform="translate(40, 20)">
+    <!-- Outer Hexagonal / Gabled Shield Outline -->
+    <path d="M 80 15 L 145 52 L 145 125 L 80 155 L 15 125 L 15 52 Z" 
+          class="gold-stroke" stroke-width="7" />
+
+    <!-- Inner Isometric Perspective Lines (Forming 'H' and Dimensional Building) -->
+    <!-- Left Pillar -->
+    <path d="M 45 65 L 45 118" class="gold-stroke" stroke-width="8" />
+    
+    <!-- Right Pillar -->
+    <path d="M 115 65 L 115 118" class="gold-stroke" stroke-width="8" />
+    
+    <!-- Central Bridge / Gable Tie forming H -->
+    <path d="M 45 92 L 80 72 L 115 92" class="gold-stroke" stroke-width="7" />
+
+    <!-- Internal Architectural Ridge Line -->
+    <line x1="80" y1="15" x2="80" y2="72" class="gold-stroke" stroke-width="4.5" stroke-dasharray="1 1" opacity="0.8" />
+    <line x1="80" y1="110" x2="80" y2="155" class="gold-stroke" stroke-width="5" />
+  </g>
+
+  <!-- TYPOGRAPHY (RIGHT): Modern Geometric Sans-Serif on Single Baseline -->
+  <g transform="translate(240, 128)">
+    <!-- HIRO: Bold, Tight Kerning, Deep Navy Slate -->
+    <text x="0" y="0" 
+          font-family="'Montserrat', 'Inter', -apple-system, sans-serif" 
+          font-size="82" 
+          font-weight="900" 
+          letter-spacing="-0.03em" 
+          class="navy-text">HIRO</text>
+
+    <!-- PROPERTY: Lighter Weight, Wide Kerning / Tracked Out -->
+    <text x="275" y="0" 
+          font-family="'Montserrat', 'Inter', -apple-system, sans-serif" 
+          font-size="82" 
+          font-weight="300" 
+          letter-spacing="0.08em" 
+          fill="#475569">PROPERTY</text>
+  </g>
+</svg>

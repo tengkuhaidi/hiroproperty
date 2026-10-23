@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="orisGoldDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCEBA4" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#B8860B" />
+    </linearGradient>
+  </defs>
+
+  <style>
+    .white-text { fill: #FFFFFF; }
+    .gold-stroke { stroke: url(#orisGoldDark); fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+
+  <!-- Deep Obsidian Background for Dark Web/Header Mode -->
+  <rect width="100%" height="100%" fill="#090a0b" rx="16" />
+
+  <!-- ICON (LEFT) -->
+  <g transform="translate(40, 20)">
+    <path d="M 80 15 L 145 52 L 145 125 L 80 155 L 15 125 L 15 52 Z" 
+          class="gold-stroke" stroke-width="7" />
+
+    <!-- Left Pillar -->
+    <path d="M 45 65 L 45 118" class="gold-stroke" stroke-width="8" />
+    
+    <!-- Right Pillar -->
+    <path d="M 115 65 L 115 118" class="gold-stroke" stroke-width="8" />
+    
+    <!-- Central Bridge forming H -->
+    <path d="M 45 92 L 80 72 L 115 92" class="gold-stroke" stroke-width="7" />
+
+    <!-- Internal Architectural Ridge Line -->
+    <line x1="80" y1="15" x2="80" y2="72" class="gold-stroke" stroke-width="4.5" opacity="0.8" />
+    <line x1="80" y1="110" x2="80" y2="155" class="gold-stroke" stroke-width="5" />
+  </g>
+
+  <!-- TYPOGRAPHY (RIGHT) -->
+  <g transform="translate(240, 128)">
+    <text x="0" y="0" 
+          font-family="'Montserrat', 'Inter', -apple-system, sans-serif" 
+          font-size="82" 
+          font-weight="900" 
+          letter-spacing="-0.03em" 
+          class="white-text">HIRO</text>
+
+    <text x="275" y="0" 
+          font-family="'Montserrat', 'Inter', -apple-system, sans-serif" 
+          font-size="82" 
+          font-weight="300" 
+          letter-spacing="0.08em" 
+          fill="#94A3B8">PROPERTY</text>
+  </g>
+</svg>
