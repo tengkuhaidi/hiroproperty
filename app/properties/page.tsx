@@ -1,13 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { PROPERTIES } from '@/data/properties';
 
-export default function PropertiesCatalogPage() {
+function CatalogContent() {
+  const searchParams = useSearchParams();
   const [selectedType, setSelectedType] = useState<string>('All');
   const [selectedPrice, setSelectedPrice] = useState<string>('All');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
+  useEffect(() => {
+    const q = searchParams.get('q');
+    if (q) setSearchTerm(q);
+  }, [searchParams]);
 
   const types = ['All', 'Villa', 'House', 'Penthouse', 'Apartment', 'Estate'];
   const priceRanges = ['All', 'Under $5M', '$5M - $10M', '$10M+'];
@@ -17,6 +25,15 @@ export default function PropertiesCatalogPage() {
     if (selectedPrice === 'Under $5M' && p.priceNumeric >= 5000000) return false;
     if (selectedPrice === '$5M - $10M' && (p.priceNumeric < 5000000 || p.priceNumeric > 10000000)) return false;
     if (selectedPrice === '$10M+' && p.priceNumeric < 10000000) return false;
+    if (searchTerm) {
+      const term = searchTerm.toLowerCase();
+      const match =
+        p.title.toLowerCase().includes(term) ||
+        p.location.toLowerCase().includes(term) ||
+        p.category.toLowerCase().includes(term) ||
+        p.description.toLowerCase().includes(term);
+      if (!match) return false;
+    }
     return true;
   });
 
@@ -113,7 +130,7 @@ export default function PropertiesCatalogPage() {
           <div className="py-24 text-center">
             <p className="font-display text-3xl text-[#14130F]">No residences found matching your criteria.</p>
             <button
-              onClick={() => { setSelectedType('All'); setSelectedPrice('All'); }}
+              onClick={() => { setSelectedType('All'); setSelectedPrice('All'); setSearchTerm(''); }}
               className="mt-4 text-xs font-semibold uppercase tracking-wider text-[#A8814F] underline underline-offset-4"
             >
               Reset filters
@@ -122,5 +139,13 @@ export default function PropertiesCatalogPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function PropertiesCatalogPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#F4F1EC]" />}>
+      <CatalogContent />
+    </Suspense>
   );
 }

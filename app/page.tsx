@@ -13,7 +13,8 @@ import FadeInView from '@/components/motion/FadeInView';
 
 export default function HomePage() {
   const router = useRouter();
-  const [activeCategory, setActiveCategory] = useState<'Villa' | 'House' | 'Penthouse' | 'Apartment' | 'Estate'>('Villa');
+  const [activeTab, setActiveTab] = useState<'BUY' | 'RENT' | 'NEW ESTATES'>('BUY');
+  const [searchQuery, setSearchQuery] = useState('');
   
   // Contact Form state
   const [formName, setFormName] = useState('');
@@ -22,12 +23,24 @@ export default function HomePage() {
   const [formNotes, setFormNotes] = useState('');
   const [formSent, setFormSent] = useState(false);
 
-  const categories = ['Villa', 'House', 'Penthouse', 'Apartment', 'Estate'] as const;
+  const tabs = [
+    { id: 'BUY', label: 'Buy' },
+    { id: 'RENT', label: 'Rent' },
+    { id: 'NEW ESTATES', label: 'New Estates' },
+  ] as const;
   const featuredProperties = PROPERTIES.slice(0, 3);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push(`/properties?type=${activeCategory.toLowerCase()}`);
+    const params = new URLSearchParams();
+    if (activeTab === 'BUY') params.set('intent', 'buy');
+    else if (activeTab === 'RENT') params.set('intent', 'rent');
+    else if (activeTab === 'NEW ESTATES') params.set('intent', 'new');
+    
+    if (searchQuery.trim()) {
+      params.set('q', searchQuery.trim());
+    }
+    router.push(`/properties?${params.toString()}`);
   };
 
   const handleContactSubmit = (e: React.FormEvent) => {
@@ -79,40 +92,89 @@ export default function HomePage() {
               <SplitText text="Homes that feel like arrival." delay={0.4} />
             </h1>
 
-            {/* Floating Search Filter Bar */}
-            <motion.form
+            {/* Floating Search Widget with Buy/Rent/New Estates Tabs */}
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.7, ease: [0.25, 1, 0.5, 1] }}
-              onSubmit={handleSearch}
-              className="flex w-full max-w-2xl flex-col gap-3 rounded-2xl bg-[#12110E]/60 p-2 backdrop-blur-xl border border-white/10 sm:flex-row sm:items-center sm:justify-between shadow-2xl"
+              className="w-full max-w-2xl rounded-2xl bg-[#12110E]/75 p-3 sm:p-4 backdrop-blur-2xl border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
             >
-              {/* Category Chips */}
-              <div className="flex flex-wrap items-center gap-1.5 px-2 py-1">
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    type="button"
-                    onClick={() => setActiveCategory(cat)}
-                    className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
-                      activeCategory === cat
-                        ? 'bg-white text-[#12110E] shadow-sm'
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
+              {/* Top Tabs (Buy, Rent, New Estates) */}
+              <div className="flex items-center gap-1 sm:gap-2 border-b border-white/10 pb-3 mb-3">
+                {tabs.map((tab) => {
+                  const isActive = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`relative px-4 py-2 text-xs sm:text-sm font-medium tracking-wider transition-all duration-300 rounded-lg ${
+                        isActive
+                          ? 'text-white font-semibold'
+                          : 'text-white/60 hover:text-white/90 hover:bg-white/5'
+                      }`}
+                    >
+                      {tab.label}
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeHeroTabIndicator"
+                          className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#A8814F] rounded-full"
+                          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                        />
+                      )}
+                    </button>
+                  );
+                })}
               </div>
 
-              {/* Action Button */}
-              <button
-                type="submit"
-                className="rounded-xl bg-[#F4F1EC] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-[#12110E] transition-all hover:bg-white hover:shadow-lg active:scale-95"
+              {/* Search Form Box */}
+              <form
+                onSubmit={handleSearch}
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5"
               >
-                Search {activeCategory.toLowerCase()}s &rarr;
-              </button>
-            </motion.form>
+                {/* Input with Search Icon */}
+                <div className="relative flex-1 flex items-center bg-white/5 hover:bg-white/10 border border-white/10 focus-within:border-white/30 rounded-xl px-3.5 py-3 transition-colors">
+                  <svg
+                    className="h-4 w-4 text-white/50 shrink-0 mr-3"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.75}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                    />
+                  </svg>
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Location, keyword, area, project, architect..."
+                    className="w-full bg-transparent text-xs sm:text-sm text-white placeholder-white/40 focus:outline-none tracking-wide"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery('')}
+                      className="text-white/40 hover:text-white text-xs px-1"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
+
+                {/* Submit CTA Button */}
+                <button
+                  type="submit"
+                  className="rounded-xl bg-[#F4F1EC] px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-[#12110E] transition-all hover:bg-white hover:shadow-lg active:scale-95 shrink-0 flex items-center justify-center gap-2"
+                >
+                  <span>Search</span>
+                  <span>&rarr;</span>
+                </button>
+              </form>
+            </motion.div>
           </div>
         </HeroFrame>
       </section>
