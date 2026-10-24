@@ -11,8 +11,9 @@ export default function Header() {
 
   // Detail / Catalog pages start with a light cream background (#F4F1EC)
   // whereas Homepage starts with a dark hero photo.
+  // When mobile menu is OPEN, background is always dark (#12110E), so header must be white.
   const isDarkPage = pathname === '/';
-  const isLightHeader = !isDarkPage && !scrolled;
+  const isLightHeader = !isDarkPage && !scrolled && !mobileMenuOpen;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -106,26 +107,38 @@ export default function Header() {
 
       {/* Mobile Menu Fullscreen Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 flex flex-col justify-between bg-[#12110E] px-8 pt-32 pb-12 text-[#F4F1EC] md:hidden animate-fade-in">
+        <div className="fixed inset-0 z-40 flex flex-col justify-between bg-[#12110E] px-6 sm:px-8 pt-28 pb-10 text-[#F4F1EC] md:hidden overflow-y-auto">
           <div className="flex flex-col gap-8">
-            <p className="text-xs uppercase tracking-[0.3em] text-[#6D675D]">Navigation</p>
-            {navLinks.map((link) => (
+            <p className="text-xs uppercase tracking-[0.3em] text-[#6D675D] font-semibold">Navigation</p>
+            <div className="flex flex-col gap-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="font-display text-4xl text-[#F4F1EC] transition-colors hover:text-[#A8814F]"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="pt-2">
               <Link
-                key={link.href}
-                href={link.href}
+                href="/#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="font-display text-4xl text-[#F4F1EC] transition-colors hover:text-[#A8814F]"
+                className="inline-block rounded-full bg-[#F4F1EC] px-8 py-3.5 text-xs font-semibold uppercase tracking-wider text-[#12110E] hover:bg-white transition-all shadow-lg"
               >
-                {link.label}
+                Inquire With Desk &rarr;
               </Link>
-            ))}
+            </div>
           </div>
 
-          <div className="border-t border-[#14130F]/30 pt-8 text-sm text-[#F4F1EC]/60">
-            <p className="text-xs uppercase tracking-[0.25em] text-[#F4F1EC] mb-2">Office</p>
-            <p>Senopati, Kebayoran Baru</p>
-            <p>Jakarta Selatan 12190</p>
-            <a href="mailto:private@hiroproperty.com" className="mt-4 block text-xs underline text-[#A8814F]">
+          <div className="border-t border-white/10 pt-6 mt-8 text-xs text-[#F4F1EC]/60 space-y-1">
+            <p className="text-[11px] uppercase tracking-[0.25em] text-[#F4F1EC] font-semibold mb-2">Private Client Desk</p>
+            <p>Senopati, Kebayoran Baru, Jakarta Selatan 12190</p>
+            <p>WhatsApp: +62 878-2517-4624</p>
+            <a href="mailto:private@hiroproperty.com" className="inline-block pt-1 text-xs underline text-[#A8814F]">
               private@hiroproperty.com
             </a>
           </div>
