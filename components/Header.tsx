@@ -9,6 +9,11 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  // Detail / Catalog pages start with a light cream background (#F4F1EC)
+  // whereas Homepage starts with a dark hero photo.
+  const isDarkPage = pathname === '/';
+  const isLightHeader = !isDarkPage && !scrolled;
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
@@ -34,13 +39,20 @@ export default function Header() {
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-[#12110E]/90 text-[#F4F1EC] backdrop-blur-xl py-4 shadow-lg shadow-black/10'
+            ? 'bg-[#12110E]/95 text-[#F4F1EC] backdrop-blur-xl py-4 shadow-lg shadow-black/10'
+            : isLightHeader
+            ? 'bg-transparent text-[#14130F] py-6'
             : 'bg-transparent text-[#F4F1EC] py-6'
         }`}
       >
         <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 md:px-12">
           {/* Logo */}
-          <Link href="/" className="font-display text-3xl tracking-tight text-white hover:opacity-90 transition-opacity">
+          <Link
+            href="/"
+            className={`font-display text-3xl tracking-tight transition-opacity hover:opacity-80 ${
+              isLightHeader ? 'text-[#14130F]' : 'text-white'
+            }`}
+          >
             Hiro <span className="italic font-normal">Property</span>
           </Link>
 
@@ -50,15 +62,27 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="group relative text-white/90 transition-colors hover:text-white"
+                className={`group relative transition-colors ${
+                  isLightHeader
+                    ? 'text-[#14130F]/80 hover:text-[#14130F]'
+                    : 'text-white/90 hover:text-white'
+                }`}
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
+                <span
+                  className={`absolute -bottom-1 left-0 h-px w-0 transition-all duration-300 group-hover:w-full ${
+                    isLightHeader ? 'bg-[#14130F]' : 'bg-white'
+                  }`}
+                />
               </Link>
             ))}
             <Link
               href="/#contact"
-              className="rounded-full border border-white/20 bg-white/10 px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur-md transition-all hover:bg-white hover:text-[#12110E]"
+              className={`rounded-full px-6 py-2.5 text-xs font-semibold uppercase tracking-wider backdrop-blur-md transition-all ${
+                isLightHeader
+                  ? 'border border-[#14130F]/20 bg-[#14130F]/5 text-[#14130F] hover:bg-[#14130F] hover:text-[#F4F1EC]'
+                  : 'border border-white/20 bg-white/10 text-white hover:bg-white hover:text-[#12110E]'
+              }`}
             >
               Inquire
             </Link>
@@ -68,7 +92,11 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-xs uppercase tracking-[0.25em] text-white hover:text-white/80 transition-colors md:hidden py-2 px-3 border border-white/20 rounded-lg bg-white/10 backdrop-blur-sm"
+            className={`text-xs uppercase tracking-[0.25em] transition-colors md:hidden py-2 px-3.5 border rounded-lg backdrop-blur-sm font-medium ${
+              isLightHeader
+                ? 'border-[#14130F]/20 bg-[#14130F]/5 text-[#14130F] hover:bg-[#14130F]/10'
+                : 'border-white/20 bg-white/10 text-white hover:text-white/80'
+            }`}
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {mobileMenuOpen ? 'CLOSE' : 'MENU'}
