@@ -1,0 +1,12 @@
+name = "hiroproperty"
+compatibility_date = "2026-04-01"
+pages_build_output_dir = "out"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "hiroproperty_db"
+database_id = "a84ddba4-92e2-490c-9f5b-e311bbc731f1"
+
+[[r2_buckets]]
+binding = "STORAGE"
+bucket_name = "hiroproperty-assets"

@@ -31,8 +31,10 @@ export default function Header() {
 
   const navLinks = [
     { href: '/properties', label: 'Properties' },
-    { href: '/#services', label: 'Services' },
-    { href: '/#contact', label: 'Contact' },
+    { href: '/masterstock', label: 'Masterstock' },
+    { href: '/articles', label: 'Journal' },
+    { href: '/dashboard', label: 'Marketing' },
+    { href: '/marcomm', label: 'Cashflow' },
   ];
 
   return (
