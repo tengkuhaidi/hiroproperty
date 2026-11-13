@@ -11,27 +11,37 @@ export default function Footer() {
             Hiro <span className="italic">Property</span>
           </Link>
           <p className="max-w-md text-sm leading-relaxed text-[#F4F1EC]/60">
-            Private-client real estate advisory for exceptional homes across Jakarta, Bali, and premier international destinations.
+            Hiro Property – private real estate, Greater Jakarta &amp; Bandung. A small number of exceptional homes, handled with discretion and care.
           </p>
         </div>
 
         {/* Explore Links */}
         <div className="text-sm leading-7 text-[#F4F1EC]/60">
-          <p className="mb-3 text-xs uppercase tracking-[0.25em] text-[#F4F1EC]">Explore</p>
+          <p className="mb-3 text-xs uppercase tracking-[0.25em] text-[#F4F1EC]">Collection &amp; Services</p>
           <ul className="space-y-2">
             <li>
               <Link href="/properties" className="hover:text-white transition-colors">
-                All properties
+                The Collection
               </Link>
             </li>
             <li>
-              <Link href="/#services" className="hover:text-white transition-colors">
-                Services
+              <Link href="/properties?intent=rent" className="hover:text-white transition-colors">
+                For Rent
               </Link>
             </li>
             <li>
-              <Link href="/#contact" className="hover:text-white transition-colors">
-                Contact
+              <Link href="/jual" className="hover:text-white transition-colors">
+                Sell with Hiro
+              </Link>
+            </li>
+            <li>
+              <Link href="/tentang" className="hover:text-white transition-colors">
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link href="/privasi" className="hover:text-white transition-colors">
+                Privacy Policy
               </Link>
             </li>
           </ul>
@@ -53,7 +63,7 @@ export default function Footer() {
       {/* Copyright Bar */}
       <div className="mx-auto max-w-[1600px] border-t border-[#F4F1EC]/10 px-6 py-6 text-xs text-[#F4F1EC]/50 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
         <p>© {new Date().getFullYear()} Hiro Property. All rights reserved.</p>
-        <p className="tracking-widest uppercase text-[10px] text-[#6D675D]">PT Hiro Properti Indonesia</p>
+        <p className="tracking-widest uppercase text-[10px] text-[#6D675D]">PT Hiro Properti Indonesia · NIB 1205240098231 · SIU-P4</p>
       </div>
     </footer>
   );

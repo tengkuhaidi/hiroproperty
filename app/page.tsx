@@ -8,7 +8,6 @@ import { motion } from 'motion/react';
 import { PROPERTIES } from '@/data/properties';
 import HeroFrame from '@/components/motion/HeroFrame';
 import SplitText from '@/components/motion/SplitText';
-import ScrollExpandFrame from '@/components/motion/ScrollExpandFrame';
 import FadeInView from '@/components/motion/FadeInView';
 
 export default function HomePage() {
@@ -18,17 +17,56 @@ export default function HomePage() {
   
   // Contact Form state
   const [formName, setFormName] = useState('');
-  const [formEmail, setFormEmail] = useState('');
-  const [formBudget, setFormBudget] = useState('IDR 6 - 15 M');
-  const [formNotes, setFormNotes] = useState('');
+  const [formWA, setFormWA] = useState('');
+  const [formArea, setFormArea] = useState('Pondok Indah');
+  const [formBudget, setFormBudget] = useState('Rp5–10 M');
+  const [formBeds, setFormBeds] = useState('4+ Kamar');
+  const [formTarget, setFormTarget] = useState('Segera (1–3 Bulan)');
   const [formSent, setFormSent] = useState(false);
 
   const tabs = [
     { id: 'BUY', label: 'Buy' },
     { id: 'RENT', label: 'Rent' },
-    { id: 'NEW ESTATES', label: 'New Estates' },
+    { id: 'NEW ESTATES', label: 'New Developments' },
   ] as const;
-  const featuredProperties = PROPERTIES.slice(0, 3);
+
+  // 1. Baru di Koleksi (6 Kartu)
+  const recentCollection = PROPERTIES.slice(0, 6);
+
+  // 2. Pilihan Kurator (3 Kartu Unggulan)
+  const curatorPicks = PROPERTIES.slice(0, 3);
+
+  // 3. Kawasan Aktif
+  const activeAreas = [
+    {
+      name: 'Menteng',
+      city: 'Jakarta Pusat',
+      character: 'Kawasan diplomatik bersejarah, jalan rindang, privasi tinggi.',
+      query: 'Menteng',
+      image: '/images/night.jpg',
+    },
+    {
+      name: 'Pondok Indah',
+      city: 'Jakarta Selatan',
+      character: 'Jalan lebar, kavling besar, dekat sekolah internasional & mall.',
+      query: 'Kota Kasablanka',
+      image: 'https://casagranderesidences.co.id/wp-content/uploads/2026/10/1001001873.jpg',
+    },
+    {
+      name: 'Cigadung & Dago',
+      city: 'Bandung',
+      character: 'Udara sejuk lereng lembah, pemandangan sawah alami, arsitektur villa kontemporer.',
+      query: 'Cigadung',
+      image: '/images/valley-house/02-exterior-dusk.jpg',
+    },
+    {
+      name: 'Bintaro & BSD',
+      city: 'Tangerang Selatan',
+      character: 'Perencanaan kota modern, akses tol langsung, komunitas mandiri tertata.',
+      query: 'Jakarta Selatan',
+      image: 'https://casagranderesidences.co.id/wp-content/uploads/2026/10/IMG-20261015-WA0010.jpg',
+    },
+  ];
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,21 +81,20 @@ export default function HomePage() {
     router.push(`/properties?${params.toString()}`);
   };
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleCriteriaSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = encodeURIComponent(
-      `Halo Private Advisory Desk Hiro Property, nama saya ${formName || 'Klien'} (${formEmail}). Saya tertarik berdiskusi mengenai portofolio properti (Budget: ${formBudget}). Catatan: ${formNotes}`
-    );
-    window.open(`https://wa.me/6287825174624?text=${msg}`, '_blank');
+    const msg = `Halo Private Desk Hiro Property, nama saya ${formName || 'Klien'} (WA: ${formWA}). Saya mencari properti dengan kriteria:\n- Kawasan: ${formArea}\n- Budget: ${formBudget}\n- Kamar: ${formBeds}\n- Target Pindah: ${formTarget}\n\nMohon info kurasi rumah yang sesuai.`;
+    window.open(`https://wa.me/6285176828199?text=${encodeURIComponent(msg)}`, '_blank');
     setFormSent(true);
   };
 
   return (
     <div className="bg-[#F4F1EC] text-[#14130F]">
-      {/* 1. HERO SECTION WITH EXPANSION KINETIC */}
-      <section className="relative h-[100svh] min-h-[680px] overflow-hidden bg-[#12110E] p-3 md:p-4">
+      {/* ─────────────────────────────────────────────────────────────
+          SECTION 1: HERO (Satu foto rumah riil layar penuh)
+         ───────────────────────────────────────────────────────────── */}
+      <section className="relative h-[100svh] min-h-[700px] overflow-hidden bg-[#12110E] p-3 md:p-4">
         <HeroFrame>
-          {/* Villa Background Image with Subtle Scale Animation */}
           <motion.div
             initial={{ scale: 1.08 }}
             animate={{ scale: 1 }}
@@ -65,8 +102,8 @@ export default function HomePage() {
             className="absolute inset-0"
           >
             <Image
-              src="/images/villa.jpg"
-              alt="Modern villa with infinity pool at dusk"
+              src="/images/valley-house/02-exterior-dusk.jpg"
+              alt="The Valley House Cigadung Bandung"
               fill
               priority
               className="object-cover"
@@ -74,32 +111,33 @@ export default function HomePage() {
             />
           </motion.div>
 
-          {/* Vignette Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#12110E]/85 via-[#12110E]/15 to-[#12110E]/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#12110E]/90 via-[#12110E]/25 to-[#12110E]/35" />
 
-          {/* Hero Content */}
-          <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-10 text-[#F4F1EC] md:px-12 md:pb-14">
+          <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-12 text-[#F4F1EC] md:px-14 md:pb-16">
             <motion.p
               initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 0.8, y: 0 }}
+              animate={{ opacity: 0.85, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="mb-4 text-xs font-semibold uppercase tracking-[0.35em] text-[#F4F1EC]/80"
+              className="mb-4 text-xs font-mono uppercase tracking-[0.3em] text-[#D4AF37]"
             >
-              Private client real estate
+              Private Real Estate · Jabodetabek &amp; Bandung
             </motion.p>
 
-            <h1 className="font-display max-w-4xl text-[clamp(3.2rem,8.5vw,7.5rem)] leading-[0.95] tracking-tight text-white mb-8">
-              <SplitText text="Homes that feel like arrival." delay={0.4} />
+            <h1 className="font-display max-w-4xl text-[clamp(3.2rem,8.2vw,7.2rem)] leading-[0.95] tracking-tight text-white mb-6">
+              <SplitText text="Homes worth staying in." delay={0.4} />
             </h1>
 
-            {/* Floating Search Widget with Buy/Rent/New Estates Tabs */}
+            <p className="max-w-2xl text-sm sm:text-base leading-relaxed text-[#F4F1EC]/75 mb-8">
+              Hiro advises on buying and selling exceptional homes across Greater Jakarta and Bandung, with the same discretion and care for every client.
+            </p>
+
+            {/* Quick Search Widget */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.7, ease: [0.25, 1, 0.5, 1] }}
-              className="w-full max-w-2xl rounded-2xl bg-[#12110E]/75 p-3 sm:p-4 backdrop-blur-2xl border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+              className="w-full max-w-3xl rounded-2xl bg-[#12110E]/80 p-3 sm:p-4 backdrop-blur-2xl border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
             >
-              {/* Top Tabs (Buy, Rent, New Estates) */}
               <div className="flex items-center gap-1 sm:gap-2 border-b border-white/10 pb-3 mb-3">
                 {tabs.map((tab) => {
                   const isActive = activeTab === tab.id;
@@ -118,8 +156,8 @@ export default function HomePage() {
                       {isActive && (
                         <motion.div
                           layoutId="activeHeroTabIndicator"
-                          className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#A8814F] rounded-full"
-                          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                          className="absolute inset-0 bg-white/15 rounded-lg -z-10"
+                          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                         />
                       )}
                     </button>
@@ -127,51 +165,19 @@ export default function HomePage() {
                 })}
               </div>
 
-              {/* Search Form Box */}
-              <form
-                onSubmit={handleSearch}
-                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5"
-              >
-                {/* Input with Search Icon */}
-                <div className="relative flex-1 flex items-center bg-white/5 hover:bg-white/10 border border-white/10 focus-within:border-white/30 rounded-xl px-3.5 py-3 transition-colors">
-                  <svg
-                    className="h-4 w-4 text-white/50 shrink-0 mr-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.75}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                    />
-                  </svg>
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Location, keyword, area, project, architect..."
-                    className="w-full bg-transparent text-xs sm:text-sm text-white placeholder-white/40 focus:outline-none tracking-wide"
-                  />
-                  {searchQuery && (
-                    <button
-                      type="button"
-                      onClick={() => setSearchQuery('')}
-                      className="text-white/40 hover:text-white text-xs px-1"
-                    >
-                      ✕
-                    </button>
-                  )}
-                </div>
-
-                {/* Submit CTA Button */}
+              <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-2">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Kawasan, jalan, atau kode listing (e.g. Cigadung, Menteng, HP-BDG-001)..."
+                  className="flex-1 rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder-white/40 backdrop-blur-md border border-white/10 focus:border-white/30 focus:outline-none"
+                />
                 <button
                   type="submit"
-                  className="rounded-xl bg-[#F4F1EC] px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-[#12110E] transition-all hover:bg-white hover:shadow-lg active:scale-95 shrink-0 flex items-center justify-center gap-2"
+                  className="rounded-xl bg-white px-8 py-3 text-xs font-semibold uppercase tracking-wider text-[#12110E] hover:bg-[#F4F1EC] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg whitespace-nowrap"
                 >
-                  <span>Search</span>
-                  <span>&rarr;</span>
+                  Telusuri Koleksi &rarr;
                 </button>
               </form>
             </motion.div>
@@ -179,107 +185,66 @@ export default function HomePage() {
         </HeroFrame>
       </section>
 
-      {/* 2. ABOUT STATEMENT SECTION */}
-      <section className="mx-auto max-w-[1600px] px-6 py-28 md:px-12 md:py-40">
-        <div className="grid gap-12 md:grid-cols-12 items-baseline">
-          <FadeInView y={15} className="md:col-span-4">
-            <p className="text-xs uppercase tracking-[0.35em] text-[#6D675D] font-semibold">
-              About Us
-            </p>
-          </FadeInView>
-          <div className="md:col-span-8">
-            <FadeInView y={25}>
-              <h2 className="font-display text-[clamp(2rem,4.4vw,4.2rem)] leading-[1.15] text-[#14130F]">
-                We represent a small number of extraordinary homes — and the people who will love living in them.
-              </h2>
-            </FadeInView>
-            <FadeInView delay={0.2} y={20}>
-              <div className="mt-8 flex flex-col sm:flex-row gap-6 text-sm leading-relaxed text-[#6D675D] max-w-2xl">
-                <p>
-                  From architectural estates in South Jakarta to discreet cliffside sanctuaries in Bali and global trophy assets, we advise private clients on properties of lasting significance.
-                </p>
-                <p>
-                  Every engagement is governed by absolute confidentiality, forensic legal due diligence, and an uncompromising eye for architectural caliber.
-                </p>
-              </div>
-            </FadeInView>
-
-            {/* Metrics */}
-            <div className="mt-20 grid grid-cols-2 gap-8 border-t border-[#14130F]/15 pt-10 sm:grid-cols-4">
-              <FadeInView delay={0.1}>
-                <p className="font-display text-5xl md:text-6xl text-[#14130F]">98%</p>
-                <p className="mt-2 text-xs uppercase tracking-wider text-[#6D675D]">Off-market privacy</p>
-              </FadeInView>
-              <FadeInView delay={0.2}>
-                <p className="font-display text-5xl md:text-6xl text-[#14130F]">IDR 6B+</p>
-                <p className="mt-2 text-xs uppercase tracking-wider text-[#6D675D]">Target asset value</p>
-              </FadeInView>
-              <FadeInView delay={0.3}>
-                <p className="font-display text-5xl md:text-6xl text-[#14130F]">100%</p>
-                <p className="mt-2 text-xs uppercase tracking-wider text-[#6D675D]">Legal compliance</p>
-              </FadeInView>
-              <FadeInView delay={0.4}>
-                <p className="font-display text-5xl md:text-6xl text-[#14130F]">1 : 1</p>
-                <p className="mt-2 text-xs uppercase tracking-wider text-[#6D675D]">Dedicated partner</p>
-              </FadeInView>
-            </div>
+      {/* ─────────────────────────────────────────────────────────────
+          SECTION 2: BARU DI KOLEKSI (6 Kartu Listing)
+         ───────────────────────────────────────────────────────────── */}
+      <section className="mx-auto max-w-[1600px] px-6 py-24 md:px-12 md:py-32">
+        <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#14130F]/15 pb-8">
+          <div>
+            <p className="text-xs uppercase tracking-[0.35em] text-[#6D675D] mb-2 font-semibold font-mono">Curated Portfolio</p>
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#14130F]">
+              Baru di <span className="italic">Koleksi</span>.
+            </h2>
           </div>
-        </div>
-      </section>
-
-      {/* 3. FEATURED RESIDENCES */}
-      <section className="mx-auto max-w-[1600px] px-6 pb-28 md:px-12 md:pb-40">
-        <FadeInView>
-          <div className="mb-14 flex items-end justify-between border-b border-[#14130F]/15 pb-6">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-[#6D675D] mb-2 font-semibold">Curated Portfolio</p>
-              <h2 className="font-display text-4xl md:text-6xl text-[#14130F]">
-                Featured <span className="italic">residences</span>
-              </h2>
-            </div>
+          <div className="flex flex-col items-start md:items-end">
+            <p className="text-sm text-[#6D675D] max-w-md md:text-right mb-2">
+              Rumah yang baru kami terima. Beberapa lainnya hanya kami tunjukkan secara pribadi atas permintaan pemilik.
+            </p>
             <Link
               href="/properties"
-              className="group flex items-center gap-2 text-sm font-medium tracking-wide text-[#14130F] hover:text-[#A8814F] transition-colors"
+              className="text-xs font-semibold uppercase tracking-wider text-[#14130F] hover:text-[#A8814F] transition-colors inline-flex items-center gap-2 group"
             >
-              <span>View all 8 properties</span>
-              <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
+              Lihat seluruh koleksi <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
             </Link>
           </div>
-        </FadeInView>
+        </div>
 
-        {/* 3-Card Grid */}
-        <div className="grid gap-8 md:grid-cols-3">
-          {featuredProperties.map((prop, idx) => (
-            <FadeInView key={prop.id} delay={idx * 0.15}>
-              <Link
-                href={`/properties/${prop.slug}`}
-                className={`group block ${idx === 1 ? 'md:mt-12' : idx === 2 ? 'md:mt-24' : ''}`}
-              >
+        <div className="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+          {recentCollection.map((prop, idx) => (
+            <FadeInView key={prop.id} delay={idx * 0.1}>
+              <Link href={`/properties/${prop.slug}`} className="group block">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-black/5 shadow-md">
                   <Image
                     src={prop.image}
                     alt={prop.title}
                     fill
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
-                  {prop.tag && (
-                    <span className="absolute top-4 left-4 rounded-full bg-[#12110E]/80 backdrop-blur-md px-3.5 py-1 text-[10px] font-semibold tracking-widest uppercase text-white border border-white/10">
-                      {prop.tag}
+                  <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10 pointer-events-none">
+                    <span className={`rounded-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase backdrop-blur-md border ${
+                      prop.tag === 'FOR RENT'
+                        ? 'bg-[#090A0B]/85 text-white/90 border-white/10'
+                        : 'bg-[#090A0B]/85 text-[#D4AF37] border-[#D4AF37]/30'
+                    }`}>
+                      {prop.tag || 'FOR SALE'}
                     </span>
-                  )}
+                    <span className="rounded-md bg-[#090A0B]/80 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase text-white/90 border border-white/10">
+                      {prop.category}
+                    </span>
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
                 <div className="mt-4 flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="font-display text-2xl text-[#14130F] group-hover:text-[#A8814F] transition-colors">
+                    <h3 className="font-display text-2xl text-[#14130F] group-hover:text-[#A8814F] transition-colors leading-snug">
                       {prop.title}
                     </h3>
-                    <p className="text-xs text-[#6D675D] mt-0.5 tracking-wide">
-                      {prop.location} · {prop.bedrooms} Beds · {prop.areaSqFt} sq ft
+                    <p className="text-xs text-[#6D675D] mt-1 tracking-wide">
+                      {prop.location} · {prop.bedrooms} Kamar · {prop.areaSqFt}
                     </p>
                   </div>
-                  <p className="font-display text-xl font-normal text-[#14130F]">
+                  <p className="font-display text-xl font-normal text-[#14130F] whitespace-nowrap">
                     {prop.price}
                   </p>
                 </div>
@@ -289,193 +254,326 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. ARCHITECTURE STATEMENT SCROLL EXPAND BANNER */}
-      <section className="bg-[#12110E] py-12">
-        <ScrollExpandFrame className="h-[80vh] min-h-[500px]">
-          <div className="relative h-full w-full">
-            <Image
-              src="/images/night.jpg"
-              alt="Architectural pavilion at twilight"
-              fill
-              className="object-cover opacity-60"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#12110E] via-transparent to-[#12110E]/50" />
-            <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-[#F4F1EC]">
-              <FadeInView y={15}>
-                <p className="text-xs uppercase tracking-[0.4em] text-white/80 mb-6 font-semibold">
-                  Architecture First
-                </p>
-              </FadeInView>
-              <FadeInView delay={0.1} y={25}>
-                <h2 className="font-display max-w-4xl text-[clamp(2.4rem,6vw,5.5rem)] leading-[1.1] text-white">
-                  Design that earns its place on the <span className="italic">skyline</span>.
-                </h2>
-              </FadeInView>
-              <FadeInView delay={0.2} y={20}>
-                <div className="mt-10">
-                  <Link
-                    href="/properties"
-                    className="rounded-full bg-white px-8 py-3.5 text-xs font-semibold uppercase tracking-wider text-[#12110E] hover:bg-[#F4F1EC] transition-all hover:scale-105 active:scale-95 inline-block"
-                  >
-                    Explore Collection
-                  </Link>
-                </div>
-              </FadeInView>
-            </div>
-          </div>
-        </ScrollExpandFrame>
-      </section>
-
-      {/* 5. SERVICES SECTION */}
-      <section id="services" className="bg-[#12110E] py-28 text-[#F4F1EC] md:py-40">
+      {/* ─────────────────────────────────────────────────────────────
+          SECTION 3: PILIHAN KURATOR (3 Kartu Besar dengan Alasan Kuratorial)
+         ───────────────────────────────────────────────────────────── */}
+      <section className="bg-white/50 border-y border-[#14130F]/10 py-24 md:py-32">
         <div className="mx-auto max-w-[1600px] px-6 md:px-12">
-          <FadeInView className="mb-20 max-w-2xl">
-            <p className="text-xs uppercase tracking-[0.35em] text-[#A8814F] mb-3 font-semibold">Advisory Capabilities</p>
-            <h2 className="font-display text-5xl md:text-6xl text-white">
-              One advisor, <span className="italic">every step</span>.
+          <div className="mb-14 max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.35em] text-[#A8814F] mb-2 font-semibold font-mono">Curator&apos;s Selection</p>
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#14130F]">
+              Pilihan <span className="italic">Kurator</span>.
             </h2>
-          </FadeInView>
+            <p className="mt-4 text-sm text-[#6D675D] leading-relaxed">
+              Rumah yang menurut kami paling bernilai saat ini, karena rasio harga terhadap kawasan, lokasi langka, atau karakter arsitekturnya.
+            </p>
+          </div>
 
-          <div className="border-t border-white/15 divide-y divide-white/10">
-            {/* 01 Buy */}
-            <FadeInView delay={0.1}>
-              <div className="group grid items-baseline gap-6 py-12 md:grid-cols-12 hover:bg-white/[0.02] transition-colors px-4">
-                <span className="font-display text-4xl text-[#6D675D] md:col-span-2">01</span>
-                <div className="md:col-span-4">
-                  <h3 className="font-display text-3xl md:text-4xl text-white group-hover:text-[#A8814F] transition-colors">
-                    Buy
-                  </h3>
-                  <p className="text-xs uppercase tracking-widest text-[#6D675D] mt-1">Discreet Acquisition</p>
-                </div>
-                <p className="text-sm leading-relaxed text-[#F4F1EC]/70 md:col-span-6">
-                  Direct access to off-market residences not visible on public portals. Complete due diligence on land zoning (RDTR DKI Jakarta), SHM legitimacy, and architectural appraisal before negotiation.
-                </p>
-              </div>
-            </FadeInView>
+          <div className="grid gap-8 md:grid-cols-3">
+            {curatorPicks.map((prop, idx) => (
+              <FadeInView key={`curator-${prop.id}`} delay={idx * 0.15}>
+                <div className="flex flex-col h-full rounded-2xl border border-[#14130F]/15 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+                  <Link href={`/properties/${prop.slug}`} className="group block relative aspect-[16/10] overflow-hidden rounded-xl bg-black/5 mb-5">
+                    <Image
+                      src={prop.image}
+                      alt={prop.title}
+                      fill
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                    <div className="absolute top-3 left-3">
+                      <span className="rounded-md bg-[#090A0B]/85 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase text-[#D4AF37] border border-[#D4AF37]/30">
+                        {prop.code || 'HP-001'}
+                      </span>
+                    </div>
+                  </Link>
 
-            {/* 02 Sell */}
-            <FadeInView delay={0.2}>
-              <div className="group grid items-baseline gap-6 py-12 md:grid-cols-12 hover:bg-white/[0.02] transition-colors px-4">
-                <span className="font-display text-4xl text-[#6D675D] md:col-span-2">02</span>
-                <div className="md:col-span-4">
-                  <h3 className="font-display text-3xl md:text-4xl text-white group-hover:text-[#A8814F] transition-colors">
-                    Sell
-                  </h3>
-                  <p className="text-xs uppercase tracking-widest text-[#6D675D] mt-1">Private Representation</p>
-                </div>
-                <p className="text-sm leading-relaxed text-[#F4F1EC]/70 md:col-span-6">
-                  Targeted introductions to qualified private investors and family offices. We craft museum-grade visual stories while protecting the owner’s anonymity throughout the entire sales lifecycle.
-                </p>
-              </div>
-            </FadeInView>
+                  <div className="flex items-baseline justify-between mb-2">
+                    <h3 className="font-display text-2xl text-[#14130F]">
+                      <Link href={`/properties/${prop.slug}`} className="hover:text-[#A8814F] transition-colors">
+                        {prop.title}
+                      </Link>
+                    </h3>
+                    <span className="font-display text-xl text-[#14130F]">{prop.price}</span>
+                  </div>
 
-            {/* 03 Invest */}
-            <FadeInView delay={0.3}>
-              <div className="group grid items-baseline gap-6 py-12 md:grid-cols-12 hover:bg-white/[0.02] transition-colors px-4">
-                <span className="font-display text-4xl text-[#6D675D] md:col-span-2">03</span>
-                <div className="md:col-span-4">
-                  <h3 className="font-display text-3xl md:text-4xl text-white group-hover:text-[#A8814F] transition-colors">
-                    Invest
-                  </h3>
-                  <p className="text-xs uppercase tracking-widest text-[#6D675D] mt-1">Capital Strategy</p>
+                  <p className="text-xs text-[#6D675D] mb-4">
+                    {prop.location} · {prop.areaSqFt}
+                  </p>
+
+                  {/* 1 Kalimat Alasan Kurator */}
+                  <div className="mt-auto border-t border-[#14130F]/10 pt-4">
+                    <p className="text-xs text-[#14130F]/85 italic leading-relaxed">
+                      &ldquo;{prop.curatorNote || 'Rasio harga per meter persegi tanah sangat kompetitif terhadap tren transaksi riil di kawasannya.'}&rdquo;
+                    </p>
+                  </div>
                 </div>
-                <p className="text-sm leading-relaxed text-[#F4F1EC]/70 md:col-span-6">
-                  Strategic counsel on yield-generating prime assets in Bali, heritage restoration in Menteng, and portfolio diversification into high-performing international tier-one markets.
-                </p>
-              </div>
-            </FadeInView>
+              </FadeInView>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 6. CONTACT SECTION */}
-      <section id="contact" className="mx-auto grid max-w-[1600px] gap-16 px-6 py-28 md:grid-cols-12 md:px-12 md:py-40">
-        <FadeInView className="md:col-span-6">
-          <p className="text-xs uppercase tracking-[0.35em] text-[#6D675D] mb-3 font-semibold">Inquiries</p>
-          <h2 className="font-display text-5xl md:text-7xl text-[#14130F] leading-tight">
-            Let’s find your <span className="italic">next address</span>.
+      {/* ─────────────────────────────────────────────────────────────
+          SECTION 4: UNTUK PEMILIK (Blok Gelap, Foto Interior)
+         ───────────────────────────────────────────────────────────── */}
+      <section className="bg-[#12110E] text-[#F4F1EC] py-24 md:py-32 relative overflow-hidden">
+        <div className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 opacity-30 pointer-events-none">
+          <Image
+            src="/images/valley-house/06-living-valley-view.jpg"
+            alt="Interior sanctuary"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#12110E] via-[#12110E]/60 to-transparent" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="max-w-xl">
+            <p className="text-xs font-mono uppercase tracking-[0.35em] text-[#D4AF37] mb-3 font-semibold">
+              Sell with Hiro · Jual Bersama Hiro
+            </p>
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white leading-tight mb-6">
+              Menjual rumah Anda dengan <span className="italic">tenang</span>.
+            </h2>
+            <p className="text-base leading-relaxed text-[#F4F1EC]/75 mb-8">
+              Kami memasarkan secara terarah, kepada pembeli yang sudah kami kenal kemampuannya. Alamat Anda tidak pernah dipublikasikan; kunjungan hanya dilakukan dengan janji temu dan pendampingan principal.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href="/jual"
+                className="rounded-full bg-white px-8 py-3.5 text-xs font-semibold uppercase tracking-wider text-[#12110E] hover:bg-[#F4F1EC] transition-all hover:scale-105 active:scale-95 shadow-lg"
+              >
+                Pelajari Titip Jual &rarr;
+              </Link>
+              <a
+                href="https://wa.me/6285176828199?text=Selamat%20siang%20Hiro%20Property,%20saya%20pemilik%20rumah%20dan%20ingin%20berkonsultasi%20penilaian%20harga%20secara%20pribadi."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-white/20 px-8 py-3.5 text-xs font-semibold uppercase tracking-wider text-white hover:bg-white/10 transition-all"
+              >
+                Minta Penilaian Pribadi
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          SECTION 5: KAWASAN YANG KAMI KENAL DARI DEKAT
+         ───────────────────────────────────────────────────────────── */}
+      <section className="mx-auto max-w-[1600px] px-6 py-24 md:px-12 md:py-32">
+        <div className="mb-14 max-w-2xl">
+          <p className="text-xs uppercase tracking-[0.35em] text-[#6D675D] mb-2 font-semibold font-mono">Neighbourhoods</p>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#14130F]">
+            Kawasan yang kami kenal dari <span className="italic">dekat</span>.
           </h2>
-          <p className="mt-6 text-sm leading-relaxed text-[#6D675D] max-w-md">
-            Whether inquiring about an active listing or commissioning a confidential acquisition search, our senior partners are available for discreet consultation.
+          <p className="mt-4 text-sm text-[#6D675D] leading-relaxed">
+            Hanya kawasan yang memiliki transaksi dan listing aktif yang kami tampilkan. Setiap kawasan memiliki karakter ruang dan ritme hidup yang berbeda.
+          </p>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {activeAreas.map((area, idx) => (
+            <FadeInView key={area.name} delay={idx * 0.1}>
+              <Link
+                href={`/properties?q=${encodeURIComponent(area.query)}`}
+                className="group relative block aspect-[3/4] overflow-hidden rounded-2xl bg-black/5 p-6 shadow-md"
+              >
+                <Image
+                  src={area.image}
+                  alt={area.name}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#12110E]/90 via-[#12110E]/40 to-transparent" />
+
+                <div className="relative z-10 flex h-full flex-col justify-end text-[#F4F1EC]">
+                  <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#D4AF37] mb-1">
+                    {area.city}
+                  </p>
+                  <h3 className="font-display text-3xl text-white mb-2 group-hover:text-[#D4AF37] transition-colors">
+                    {area.name}
+                  </h3>
+                  <p className="text-xs leading-relaxed text-[#F4F1EC]/75 line-clamp-3">
+                    {area.character}
+                  </p>
+                </div>
+              </Link>
+            </FadeInView>
+          ))}
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          SECTION 6: CARA KAMI BEKERJA (3 Pilar Sesuai Dokumen)
+         ───────────────────────────────────────────────────────────── */}
+      <section className="bg-[#12110E] py-24 text-[#F4F1EC] md:py-32">
+        <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="mb-16 max-w-2xl">
+            <p className="text-xs font-mono uppercase tracking-[0.35em] text-[#D4AF37] mb-3 font-semibold">Our Principles</p>
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white">
+              Cara kami <span className="italic">bekerja</span>.
+            </h2>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-3 border-t border-white/15 pt-12">
+            <div>
+              <span className="font-mono text-xs uppercase tracking-widest text-[#D4AF37] block mb-3">01 · Discretion</span>
+              <h3 className="font-display text-2xl md:text-3xl text-white mb-3">Kerahasiaan sejak awal.</h3>
+              <p className="text-sm leading-relaxed text-[#F4F1EC]/70">
+                Alamat pemilik tidak dipublikasikan ke sembarang orang; kunjungan hanya dilakukan setelah verifikasi jadwal janji temu.
+              </p>
+            </div>
+            <div>
+              <span className="font-mono text-xs uppercase tracking-widest text-[#D4AF37] block mb-3">02 · Reasoned Valuation</span>
+              <h3 className="font-display text-2xl md:text-3xl text-white mb-3">Harga yang bisa dijelaskan.</h3>
+              <p className="text-sm leading-relaxed text-[#F4F1EC]/70">
+                Setiap rumah kami bandingkan secara objektif dengan transaksi riil di sekitarnya, bukan dari klaim sepihak.
+              </p>
+            </div>
+            <div>
+              <span className="font-mono text-xs uppercase tracking-widest text-[#D4AF37] block mb-3">03 · One Point of Contact</span>
+              <h3 className="font-display text-2xl md:text-3xl text-white mb-3">Satu orang yang mendampingi.</h3>
+              <p className="text-sm leading-relaxed text-[#F4F1EC]/70">
+                Dari kunjungan pertama hingga penandatanganan akta jual beli di hadapan notaris, Anda didampingi oleh principal yang sama.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          SECTION 7: PENUTUP (Form Sampaikan Kriteria Anda)
+         ───────────────────────────────────────────────────────────── */}
+      <section id="contact" className="mx-auto grid max-w-[1600px] gap-16 px-6 py-24 md:grid-cols-12 md:px-12 md:py-32">
+        <div className="md:col-span-5">
+          <p className="text-xs uppercase tracking-[0.35em] text-[#6D675D] mb-3 font-semibold font-mono">Private Search Desk</p>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#14130F] leading-tight">
+            Ceritakan rumah yang <span className="italic">Anda cari</span>.
+          </h2>
+          <p className="mt-6 text-sm leading-relaxed text-[#6D675D]">
+            Kami akan menghubungi Anda secara pribadi, sering kali sebelum rumahnya tampil di website ini. Sebagian portofolio terbaik kami hanya diperlihatkan secara privat.
           </p>
 
-          <div className="mt-12 space-y-3 text-sm text-[#14130F]">
-            <p className="font-semibold text-xs uppercase tracking-widest text-[#6D675D]">Direct Desk</p>
-            <p>WhatsApp: +62 878-2517-4624</p>
-            <p>Email: private@hiroproperty.com</p>
+          <div className="mt-10 border-t border-[#14130F]/15 pt-6 space-y-2 text-xs text-[#6D675D]">
+            <p className="font-semibold text-[#14130F] uppercase tracking-wider">Direct WhatsApp Desk</p>
+            <p className="font-mono text-sm text-[#14130F]">+62 851-7682-8199</p>
+            <p>Senin – Sabtu, 09.00 – 18.00 WIB</p>
           </div>
-        </FadeInView>
+        </div>
 
-        <FadeInView delay={0.2} className="md:col-span-6">
+        <div className="md:col-span-7">
           {formSent ? (
-            <div className="rounded-2xl border border-black/10 bg-white p-8 text-center shadow-lg">
-              <h3 className="font-display text-3xl text-[#14130F]">Inquiry Prepared</h3>
-              <p className="mt-3 text-sm text-[#6D675D]">
-                Connecting you directly to our Private Advisory WhatsApp Desk...
+            <div className="rounded-2xl border border-black/10 bg-white p-10 text-center shadow-lg">
+              <h3 className="font-display text-3xl text-[#14130F]">Kriteria Terkirim</h3>
+              <p className="mt-3 text-sm text-[#6D675D] max-w-md mx-auto">
+                Menghubungkan Anda langsung ke Private Desk WhatsApp Hiro Property untuk pencarian terkurasi...
               </p>
             </div>
           ) : (
-            <form onSubmit={handleContactSubmit} className="space-y-6">
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-1">Your Name</label>
-                <input
-                  type="text"
-                  required
-                  value={formName}
-                  onChange={(e) => setFormName(e.target.value)}
-                  placeholder="e.g. Alexander Pratama"
-                  className="w-full border-b border-[#14130F]/20 bg-transparent py-3 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none"
-                />
+            <form onSubmit={handleCriteriaSubmit} className="rounded-2xl border border-[#14130F]/15 bg-white p-8 md:p-10 shadow-sm space-y-6">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2 font-mono">Nama Anda</label>
+                  <input
+                    type="text"
+                    required
+                    value={formName}
+                    onChange={(e) => setFormName(e.target.value)}
+                    placeholder="Bapak / Ibu..."
+                    className="w-full border-b border-[#14130F]/20 bg-transparent py-2.5 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2 font-mono">Nomor WhatsApp</label>
+                  <input
+                    type="tel"
+                    required
+                    value={formWA}
+                    onChange={(e) => setFormWA(e.target.value)}
+                    placeholder="0812..."
+                    className="w-full border-b border-[#14130F]/20 bg-transparent py-2.5 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none"
+                  />
+                </div>
               </div>
 
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-1">Email / Phone</label>
-                <input
-                  type="text"
-                  required
-                  value={formEmail}
-                  onChange={(e) => setFormEmail(e.target.value)}
-                  placeholder="e.g. client@familyoffice.com"
-                  className="w-full border-b border-[#14130F]/20 bg-transparent py-3 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none"
-                />
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2 font-mono">Kawasan Minat</label>
+                  <select
+                    value={formArea}
+                    onChange={(e) => setFormArea(e.target.value)}
+                    className="w-full border-b border-[#14130F]/20 bg-transparent py-2.5 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none"
+                  >
+                    <option value="Pondok Indah">Pondok Indah</option>
+                    <option value="Menteng">Menteng</option>
+                    <option value="Cigadung & Dago Bandung">Cigadung &amp; Dago Bandung</option>
+                    <option value="Bintaro & BSD">Bintaro &amp; BSD</option>
+                    <option value="Kawasan Lainnya">Kawasan Lainnya di Jabodetabek</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2 font-mono">Rentang Budget</label>
+                  <select
+                    value={formBudget}
+                    onChange={(e) => setFormBudget(e.target.value)}
+                    className="w-full border-b border-[#14130F]/20 bg-transparent py-2.5 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none"
+                  >
+                    <option value="Rp5–10 M">Rp5 – 10 Miliar</option>
+                    <option value="Rp10–20 M">Rp10 – 20 Miliar</option>
+                    <option value="Rp20–35 M">Rp20 – 35 Miliar</option>
+                    <option value="di atas Rp35 M">di atas Rp35 Miliar</option>
+                  </select>
+                </div>
               </div>
 
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-1">Investment Budget</label>
-                <select
-                  value={formBudget}
-                  onChange={(e) => setFormBudget(e.target.value)}
-                  className="w-full border-b border-[#14130F]/20 bg-transparent py-3 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none"
-                >
-                  <option value="IDR 6 - 15 M">IDR 6 - 15 Miliar</option>
-                  <option value="IDR 15 - 35 M">IDR 15 - 35 Miliar</option>
-                  <option value="IDR 35 - 75 M">IDR 35 - 75 Miliar</option>
-                  <option value="> IDR 75 M (Trophy Asset)">&gt; IDR 75 Miliar (Trophy Asset)</option>
-                  <option value="International / Overseas Portfolio">International / Overseas Portfolio</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-1">Message / Requirements</label>
-                <textarea
-                  rows={3}
-                  value={formNotes}
-                  onChange={(e) => setFormNotes(e.target.value)}
-                  placeholder="Tell us what you are looking for..."
-                  className="w-full border-b border-[#14130F]/20 bg-transparent py-3 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none resize-none"
-                />
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2 font-mono">Kamar Tidur</label>
+                  <select
+                    value={formBeds}
+                    onChange={(e) => setFormBeds(e.target.value)}
+                    className="w-full border-b border-[#14130F]/20 bg-transparent py-2.5 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none"
+                  >
+                    <option value="3+ Kamar">3+ Kamar Tidur</option>
+                    <option value="4+ Kamar">4+ Kamar Tidur</option>
+                    <option value="5+ Kamar">5+ Kamar Tidur</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2 font-mono">Target Pindah</label>
+                  <select
+                    value={formTarget}
+                    onChange={(e) => setFormTarget(e.target.value)}
+                    className="w-full border-b border-[#14130F]/20 bg-transparent py-2.5 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none"
+                  >
+                    <option value="Segera (1–3 Bulan)">Segera (1–3 Bulan)</option>
+                    <option value="3–6 Bulan">3–6 Bulan ke depan</option>
+                    <option value="Eksplorasi Santai">Eksplorasi Santai / Investasi</option>
+                  </select>
+                </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full rounded-full bg-[#12110E] py-4 text-xs font-semibold uppercase tracking-widest text-white transition-all hover:bg-[#A8814F] hover:shadow-lg"
+                className="w-full rounded-xl bg-[#12110E] py-4 text-xs font-semibold uppercase tracking-widest text-white transition-all hover:bg-[#A8814F] hover:shadow-lg"
               >
-                Send Confidential Inquiry &rarr;
+                Kirim Kriteria ke Private Desk &rarr;
               </button>
+
+              <p className="text-[11px] text-[#6D675D] text-center">
+                Data Anda hanya dipakai untuk mencarikan rumah dan tidak pernah dibagikan ke pihak lain.{' '}
+                <Link href="/privasi" className="underline hover:text-[#14130F]">
+                  Kebijakan Privasi
+                </Link>
+                .
+              </p>
             </form>
           )}
-        </FadeInView>
+        </div>
       </section>
     </div>
   );

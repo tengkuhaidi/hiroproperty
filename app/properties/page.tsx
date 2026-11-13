@@ -14,17 +14,19 @@ function CatalogContent() {
 
   useEffect(() => {
     const q = searchParams.get('q');
+    const cat = searchParams.get('type') || searchParams.get('category');
     if (q) setSearchTerm(q);
+    if (cat && types.includes(cat)) setSelectedType(cat);
   }, [searchParams]);
 
-  const types = ['All', 'Villa', 'House', 'Penthouse', 'Apartment', 'Estate'];
-  const priceRanges = ['All', 'Under $5M', '$5M - $10M', '$10M+'];
+  const types = ['All', 'Apartment', 'Villa', 'House', 'Penthouse', 'Estate'];
+  const priceRanges = ['All', 'Under Rp 5 Miliar / Sewa', 'Rp 5M - 10M', 'Rp 10M+'];
 
   const filtered = PROPERTIES.filter((p) => {
     if (selectedType !== 'All' && p.category !== selectedType) return false;
-    if (selectedPrice === 'Under $5M' && p.priceNumeric >= 5000000) return false;
-    if (selectedPrice === '$5M - $10M' && (p.priceNumeric < 5000000 || p.priceNumeric > 10000000)) return false;
-    if (selectedPrice === '$10M+' && p.priceNumeric < 10000000) return false;
+    if (selectedPrice === 'Under Rp 5 Miliar / Sewa' && p.priceNumeric >= 5000000000) return false;
+    if (selectedPrice === 'Rp 5M - 10M' && (p.priceNumeric < 5000000000 || p.priceNumeric > 10000000000)) return false;
+    if (selectedPrice === 'Rp 10M+' && p.priceNumeric < 10000000000) return false;
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
       const match =
@@ -101,11 +103,19 @@ function CatalogContent() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                {prop.tag && (
-                  <span className="absolute top-4 left-4 rounded-full bg-[#12110E]/85 backdrop-blur-md px-3.5 py-1 text-[10px] font-semibold tracking-widest uppercase text-white border border-white/10">
-                    {prop.tag}
+                {/* Paired Badges (Option 2: Transaction & Asset Category) */}
+                <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10 pointer-events-none">
+                  <span className={`rounded-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase backdrop-blur-md border ${
+                    prop.tag === 'FOR RENT'
+                      ? 'bg-[#090A0B]/85 text-white/90 border-white/10'
+                      : 'bg-[#090A0B]/85 text-[#D4AF37] border-[#D4AF37]/30'
+                  }`}>
+                    {prop.tag || 'FOR SALE'}
                   </span>
-                )}
+                  <span className="rounded-md bg-[#090A0B]/80 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase text-white/90 border border-white/10">
+                    {prop.category}
+                  </span>
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
 
@@ -115,7 +125,7 @@ function CatalogContent() {
                     {prop.title}
                   </h2>
                   <p className="text-xs text-[#6D675D] mt-0.5 tracking-wide">
-                    {prop.location} · {prop.bedrooms} Beds · {prop.bathrooms} Baths · {prop.areaSqFt} sq ft
+                    {prop.location} · {prop.bedrooms} Beds · {prop.bathrooms} Baths · {prop.areaSqFt}
                   </p>
                 </div>
                 <p className="font-display text-xl font-normal text-[#14130F] whitespace-nowrap">

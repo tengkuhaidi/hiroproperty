@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { PROPERTIES } from '@/data/properties';
+import PropertyGallery from '@/components/PropertyGallery';
+import MobileFloatingCTA from '@/components/MobileFloatingCTA';
 
 // Generate static params for all properties (SSG Best Practice)
 export function generateStaticParams() {
@@ -28,63 +30,67 @@ export default async function PropertyDetailPage({
   return (
     <div className="bg-[#F4F1EC] pt-32 pb-40 text-[#14130F]">
       <div className="mx-auto max-w-[1600px] px-6 md:px-12">
-        {/* Breadcrumb */}
-        <Link
-          href="/properties"
-          className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-[#6D675D] hover:text-[#14130F] transition-colors mb-8"
-        >
-          <span>&larr;</span>
-          <span>All properties</span>
-        </Link>
+        {/* Refined Hierarchical Breadcrumbs (The Modern House / Inigo standard) */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[#6D675D]">
+            <li>
+              <Link href="/" className="hover:text-[#14130F] transition-colors">
+                Index
+              </Link>
+            </li>
+            <li className="text-[#14130F]/20">/</li>
+            <li>
+              <Link href="/properties" className="hover:text-[#14130F] transition-colors">
+                Properties
+              </Link>
+            </li>
+            <li className="text-[#14130F]/20">/</li>
+            <li>
+              <Link
+                href={`/properties?type=${encodeURIComponent(property.category)}`}
+                className="hover:text-[#A8814F] transition-colors text-[#14130F]"
+              >
+                {property.category}
+              </Link>
+            </li>
+            <li className="text-[#14130F]/20">/</li>
+            <li>
+              <Link
+                href={`/properties?q=${encodeURIComponent(property.location.split(',')[0].trim())}`}
+                className="hover:text-[#A8814F] transition-colors"
+              >
+                {property.location.split(',')[0].trim()}
+              </Link>
+            </li>
+          </ol>
+        </nav>
 
         {/* Hero Title & Price Row */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#14130F]/15 mb-10">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#A8814F] block mb-2">
-              {property.category} · {property.location}
-            </span>
             <h1 className="font-display text-[clamp(2.6rem,6vw,5.5rem)] leading-none text-[#14130F]">
               {property.title}
             </h1>
+            <p className="mt-2 text-xs font-mono tracking-widest text-[#6D675D] uppercase">
+              {property.code || 'HP-001'} · {property.location}
+            </p>
           </div>
           <div className="text-left md:text-right">
-            <span className="text-xs uppercase tracking-wider text-[#6D675D] block mb-1">Asking Valuation</span>
+            <span className="text-xs uppercase tracking-wider text-[#6D675D] block mb-1">Asking Price</span>
             <p className="font-display text-4xl md:text-5xl text-[#14130F]">{property.price}</p>
           </div>
         </div>
 
-        {/* Gallery Grid */}
-        <div className="grid gap-6 md:grid-cols-12 mb-16">
-          {/* Main Hero Shot */}
-          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-black/5 md:col-span-8 shadow-lg">
-            <Image
-              src={property.image}
-              alt={property.title}
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 66vw"
-            />
-          </div>
-
-          {/* Secondary Stack */}
-          <div className="grid gap-6 md:col-span-4">
-            {property.gallery.slice(1, 3).map((img, idx) => (
-              <div key={idx} className="relative aspect-[16/10] md:aspect-auto md:h-full overflow-hidden rounded-2xl bg-black/5 shadow-md">
-                <Image
-                  src={img}
-                  alt={`${property.title} view ${idx + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Gallery with Fullscreen Lightbox */}
+        <PropertyGallery
+          title={property.title}
+          image={property.image}
+          video={property.video}
+          gallery={property.gallery}
+        />
 
         {/* Metrics Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 py-8 border-y border-[#14130F]/15 mb-16">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 py-8 border-y border-[#14130F]/15 mb-16">
           <div>
             <p className="text-xs uppercase tracking-wider text-[#6D675D]">Bedrooms</p>
             <p className="font-display text-3xl md:text-4xl text-[#14130F] mt-1">{property.bedrooms}</p>
@@ -94,8 +100,16 @@ export default async function PropertyDetailPage({
             <p className="font-display text-3xl md:text-4xl text-[#14130F] mt-1">{property.bathrooms}</p>
           </div>
           <div>
-            <p className="text-xs uppercase tracking-wider text-[#6D675D]">Living Area</p>
-            <p className="font-display text-3xl md:text-4xl text-[#14130F] mt-1">{property.areaSqFt} <span className="text-base font-normal">sq ft</span></p>
+            <p className="text-xs uppercase tracking-wider text-[#6D675D]">Floor Area</p>
+            <p className="font-display text-3xl md:text-4xl text-[#14130F] mt-1">{property.buildingArea || property.areaSqFt}</p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-wider text-[#6D675D]">Land / Title</p>
+            <p className="font-display text-2xl md:text-3xl text-[#14130F] mt-1">{property.landArea || 'Private'}</p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-wider text-[#6D675D]">Certificate</p>
+            <p className="font-display text-2xl md:text-3xl text-[#14130F] mt-1">{property.certificate || 'SHM'}</p>
           </div>
           <div>
             <p className="text-xs uppercase tracking-wider text-[#6D675D]">Year Built</p>
@@ -107,9 +121,35 @@ export default async function PropertyDetailPage({
         <div className="grid gap-16 lg:grid-cols-12 items-start">
           {/* Main Description & Amenities */}
           <div className="lg:col-span-8 space-y-12">
+            {property.curatorNote && (
+              <div className="rounded-xl border border-[#A8814F]/30 bg-[#A8814F]/5 p-6 md:p-8">
+                <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#A8814F] font-semibold mb-2">
+                  Curator Note · Catatan Kurator
+                </p>
+                <p className="font-display text-lg md:text-xl text-[#14130F] leading-snug">
+                  &ldquo;{property.curatorNote}&rdquo;
+                </p>
+              </div>
+            )}
+
             <div>
               <h2 className="font-display text-3xl text-[#14130F] mb-4">Architectural Overview</h2>
-              <p className="text-base leading-relaxed text-[#6D675D]">{property.description}</p>
+              <div className="text-base leading-relaxed text-[#6D675D] space-y-4">
+                {property.description.includes('\n\n') ? (
+                  property.description.split('\n\n').map((para, idx) => (
+                    <p key={idx}>{para}</p>
+                  ))
+                ) : (
+                  <>
+                    <p>
+                      Set within the premier Kota Kasablanka enclave, this residence balances understated contemporary finishes with expansive urban outlooks. Designed with generous natural light, cross-ventilation, and an efficient floor plan tailored for sophisticated city living.
+                    </p>
+                    <p>
+                      Direct integrated access to prime retail, lifestyle amenities, and the central business districts of Rasuna Said and Mega Kuningan provides effortless connectivity while maintaining quiet residential privacy.
+                    </p>
+                  </>
+                )}
+              </div>
             </div>
 
             <div>
@@ -126,7 +166,7 @@ export default async function PropertyDetailPage({
           </div>
 
           {/* Sticky Inquiry Card */}
-          <div className="lg:col-span-4 sticky top-28 rounded-2xl border border-[#14130F]/15 bg-white p-8 shadow-xl">
+          <div className="lg:col-span-4 sticky top-28 rounded-xl border border-[#14130F]/15 bg-white p-8 shadow-sm">
             <p className="text-xs uppercase tracking-widest text-[#6D675D] mb-1 font-semibold">Private Advisory Desk</p>
             <h3 className="font-display text-2xl text-[#14130F] mb-4">Inquire About This Property</h3>
             <p className="text-xs text-[#6D675D] leading-relaxed mb-6">
@@ -134,12 +174,12 @@ export default async function PropertyDetailPage({
             </p>
 
             <a
-              href={`https://wa.me/6287825174624?text=Halo%20Hiro%20Property,%20saya%20tertarik%20dengan%20properti%20${encodeURIComponent(property.title)}%20(${encodeURIComponent(property.location)})`}
+              href={`https://wa.me/6285176828199?text=${encodeURIComponent(`Selamat siang Hiro Property, saya tertarik dengan ${property.code || 'HP-001'}, ${property.title} (${property.location}). Mohon info jadwal kunjungan pribadi.`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="block w-full text-center rounded-xl bg-[#12110E] py-4 text-xs font-semibold uppercase tracking-wider text-white transition-all hover:bg-[#A8814F] shadow-lg mb-3"
             >
-              Schedule Private Viewing &rarr;
+              Arrange Private Viewing &rarr;
             </a>
 
             <a
@@ -167,6 +207,19 @@ export default async function PropertyDetailPage({
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
+                  {/* Paired Badges (Option 2: Transaction & Asset Category) */}
+                  <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10 pointer-events-none">
+                    <span className={`rounded-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase backdrop-blur-md border ${
+                      sp.tag === 'FOR RENT'
+                        ? 'bg-[#090A0B]/85 text-white/90 border-white/10'
+                        : 'bg-[#090A0B]/85 text-[#D4AF37] border-[#D4AF37]/30'
+                    }`}>
+                      {sp.tag || 'FOR SALE'}
+                    </span>
+                    <span className="rounded-md bg-[#090A0B]/80 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase text-white/90 border border-white/10">
+                      {sp.category}
+                    </span>
+                  </div>
                 </div>
                 <div className="mt-4 flex items-start justify-between">
                   <div>
@@ -179,6 +232,13 @@ export default async function PropertyDetailPage({
             ))}
           </div>
         </div>
+        {/* Mobile Floating Sticky CTA */}
+        <MobileFloatingCTA
+          title={property.title}
+          price={property.price}
+          location={property.location}
+          code={property.code}
+        />
       </div>
     </div>
   );

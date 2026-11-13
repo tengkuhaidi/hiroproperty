@@ -30,11 +30,11 @@ export default function Header() {
   }, [pathname]);
 
   const navLinks = [
-    { href: '/properties', label: 'Properties' },
-    { href: '/masterstock', label: 'Masterstock' },
+    { href: '/properties', label: 'Collection' },
+    { href: '/properties?intent=rent', label: 'For Rent' },
+    { href: '/jual', label: 'Sell with Hiro' },
+    { href: '/tentang', label: 'About' },
     { href: '/articles', label: 'Journal' },
-    { href: '/dashboard', label: 'Marketing' },
-    { href: '/marcomm', label: 'Cashflow' },
   ];
 
   return (
@@ -79,16 +79,18 @@ export default function Header() {
                 />
               </Link>
             ))}
-            <Link
-              href="/#contact"
+            <a
+              href="https://wa.me/6285176828199?text=Hello%20Hiro%20Property,%20I%20would%20like%20to%20connect%20with%20the%20Private%20Desk."
+              target="_blank"
+              rel="noopener noreferrer"
               className={`rounded-full px-6 py-2.5 text-xs font-semibold uppercase tracking-wider backdrop-blur-md transition-all ${
                 isLightHeader
                   ? 'border border-[#14130F]/20 bg-[#14130F]/5 text-[#14130F] hover:bg-[#14130F] hover:text-[#F4F1EC]'
                   : 'border border-white/20 bg-white/10 text-white hover:bg-white hover:text-[#12110E]'
               }`}
             >
-              Inquire
-            </Link>
+              Private Desk
+            </a>
           </nav>
 
           {/* Mobile Menu Trigger */}
@@ -118,11 +120,20 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="font-display text-4xl text-[#F4F1EC] transition-colors hover:text-[#A8814F]"
+                  className="font-display text-3xl sm:text-4xl hover:text-white/80 transition-colors"
                 >
                   {link.label}
                 </Link>
               ))}
+              <a
+                href="https://wa.me/6285176828199?text=Hello%20Hiro%20Property,%20I%20would%20like%20to%20connect%20with%20the%20Private%20Desk."
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)}
+                className="font-display text-3xl sm:text-4xl text-[#A8814F] hover:text-[#D4AF37] transition-colors"
+              >
+                Private Desk &rarr;
+              </a>
             </div>
 
             <div className="pt-2">
@@ -139,7 +150,7 @@ export default function Header() {
           <div className="border-t border-white/10 pt-6 mt-8 text-xs text-[#F4F1EC]/60 space-y-1">
             <p className="text-[11px] uppercase tracking-[0.25em] text-[#F4F1EC] font-semibold mb-2">Private Client Desk</p>
             <p>Senopati, Kebayoran Baru, Jakarta Selatan 12190</p>
-            <p>WhatsApp: +62 878-2517-4624</p>
+            <p>WhatsApp: +62 851-7682-8199</p>
             <a href="mailto:private@hiroproperty.com" className="inline-block pt-1 text-xs underline text-[#A8814F]">
               private@hiroproperty.com
             </a>
