@@ -161,7 +161,7 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={closeMobileMenu}
-                className="font-display text-3xl sm:text-4xl text-[#A8814F] hover:text-[#D4AF37] transition-colors"
+                className="font-display text-3xl sm:text-4xl text-[#A8814F] hover:text-[#C9A571] transition-colors"
               >
                 Private Desk &rarr;
               </a>

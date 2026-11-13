@@ -41,7 +41,7 @@ export default function MobileFloatingCTA({ title, price, location, code }: Mobi
           href={waLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-shrink-0 inline-flex items-center gap-2 rounded-lg bg-[#D4AF37] px-4 py-2.5 text-xs font-semibold tracking-wider uppercase text-[#090A0B] hover:bg-[#F5D485] transition-colors"
+          className="flex-shrink-0 inline-flex items-center gap-2 rounded-lg bg-[#A8814F] px-4 py-2.5 text-xs font-semibold tracking-wider uppercase text-[#090A0B] hover:bg-[#C9A571] transition-colors"
         >
           <span>Inquire Desk</span>
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

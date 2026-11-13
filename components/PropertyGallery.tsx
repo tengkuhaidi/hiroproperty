@@ -108,7 +108,7 @@ export default function PropertyGallery({ title, image, gallery, video }: Proper
           onClick={() => openLightbox(mobileIndex)}
           className="absolute bottom-4 left-5 z-10 inline-flex items-center gap-1.5 rounded-full bg-[#090A0B]/75 backdrop-blur-sm px-3 py-1 text-[10px] uppercase tracking-wider text-white/90 border border-white/10"
         >
-          <svg className="w-3 h-3 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-3 h-3 text-[#A8814F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
           </svg>
           <span>Fullscreen</span>
@@ -147,7 +147,7 @@ export default function PropertyGallery({ title, image, gallery, video }: Proper
               }}
               className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-lg bg-[#090A0B]/85 backdrop-blur-md px-3.5 py-2 text-xs font-medium tracking-wide text-white border border-white/15 hover:bg-[#090A0B] transition-all"
             >
-              <svg className="w-3.5 h-3.5 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 text-[#A8814F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               <span>View Gallery ({allImages.length})</span>
@@ -198,7 +198,7 @@ export default function PropertyGallery({ title, image, gallery, video }: Proper
       >
         {/* Top Controls */}
         <div className="absolute top-6 inset-x-6 flex items-center justify-between text-white z-10">
-          <span className="text-xs tracking-widest uppercase font-mono text-[#D4AF37]">
+          <span className="text-xs tracking-widest uppercase font-mono text-[#A8814F]">
             {String(currentIndex + 1).padStart(2, '0')} / {String(allImages.length).padStart(2, '0')} · {title}
           </span>
           <button
@@ -259,7 +259,7 @@ export default function PropertyGallery({ title, image, gallery, video }: Proper
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               className={`relative h-12 w-16 flex-shrink-0 overflow-hidden rounded border transition-all ${
-                currentIndex === idx ? 'border-[#D4AF37] opacity-100' : 'border-white/10 opacity-40 hover:opacity-80'
+                currentIndex === idx ? 'border-[#A8814F] opacity-100' : 'border-white/10 opacity-40 hover:opacity-80'
               }`}
             >
               <Image src={img} alt={`thumb ${idx}`} fill className="object-cover" />

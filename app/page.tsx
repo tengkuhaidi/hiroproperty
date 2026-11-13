@@ -115,15 +115,6 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#12110E]/90 via-[#12110E]/25 to-[#12110E]/35" />
 
           <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-12 text-[#F4F1EC] md:px-14 md:pb-16">
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 0.85, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="mb-4 text-xs uppercase tracking-[0.3em] text-[#D4AF37]"
-            >
-              Private Real Estate · Jabodetabek &amp; Bandung
-            </motion.p>
-
             <h1 className="font-display max-w-4xl text-[clamp(3.2rem,8.2vw,7.2rem)] leading-[0.95] tracking-tight text-white mb-6">
               <SplitText text="Homes worth staying in." delay={0.4} />
             </h1>
@@ -273,7 +264,7 @@ export default function HomePage() {
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="rounded-md bg-[#090A0B]/80 px-2.5 py-1 text-[10px] tracking-wide uppercase text-[#D4AF37] border border-[#D4AF37]/30">
+                      <span className="rounded-md bg-[#090A0B]/80 px-2.5 py-1 text-[10px] tracking-wide uppercase text-white/90 border border-white/10">
                         {prop.code || 'HP-001'}
                       </span>
                     </div>
@@ -378,10 +369,10 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#12110E]/90 via-[#12110E]/40 to-transparent" />
 
                 <div className="relative z-10 flex h-full flex-col justify-end text-[#F4F1EC]">
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] mb-1">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-[#A8814F] mb-1">
                     {area.city}
                   </p>
-                  <h3 className="font-display text-3xl text-white mb-2 group-hover:text-[#D4AF37] transition-colors">
+                  <h3 className="font-display text-3xl text-white mb-2 group-hover:text-[#A8814F] transition-colors">
                     {area.name}
                   </h3>
                   <p className="text-xs leading-relaxed text-[#F4F1EC]/75 line-clamp-3">
