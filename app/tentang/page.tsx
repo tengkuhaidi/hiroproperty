@@ -12,7 +12,7 @@ export default function TentangPage() {
       <div className="mx-auto max-w-[1200px] px-6 md:px-12">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[#6D675D]">
+          <ol className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[#6D675D]">
             <li>
               <Link href="/" className="hover:text-[#14130F] transition-colors">
                 Index
@@ -25,9 +25,6 @@ export default function TentangPage() {
 
         {/* Section 1: Pembuka */}
         <div className="mb-20 max-w-3xl">
-          <p className="text-xs font-mono uppercase tracking-[0.35em] text-[#A8814F] mb-3 font-semibold">
-            About Hiro Property
-          </p>
           <h1 className="font-display text-[clamp(2.8rem,6.5vw,5.5rem)] leading-[1.05] text-[#14130F] mb-6">
             Kecil, dengan <span className="italic">sengaja</span>.
           </h1>
@@ -80,7 +77,7 @@ export default function TentangPage() {
           <p className="text-sm text-[#6D675D] leading-relaxed mb-6">
             Seluruh transaksi dan aktivitas perantara properti bernaung di bawah entitas resmi berbadan hukum:
           </p>
-          <div className="grid gap-4 sm:grid-cols-2 text-xs font-mono text-[#14130F]">
+          <div className="grid gap-4 sm:grid-cols-2 text-xs text-[#14130F]">
             <div className="border-b border-[#14130F]/10 pb-2">
               <span className="text-[#6D675D] block uppercase">Badan Hukum</span>
               <span>PT Hiro Properti Indonesia</span>

@@ -12,7 +12,7 @@ export default function JualPage() {
       <div className="mx-auto max-w-[1200px] px-6 md:px-12">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[#6D675D]">
+          <ol className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[#6D675D]">
             <li>
               <Link href="/" className="hover:text-[#14130F] transition-colors">
                 Index
@@ -25,9 +25,6 @@ export default function JualPage() {
 
         {/* Section 1: Hero */}
         <div className="mb-20 max-w-3xl">
-          <p className="text-xs font-mono uppercase tracking-[0.35em] text-[#A8814F] mb-3 font-semibold">
-            Private Representation
-          </p>
           <h1 className="font-display text-[clamp(2.8rem,6.5vw,5.5rem)] leading-[1.05] text-[#14130F] mb-6">
             Rumah Anda, dijual dengan cara yang <span className="italic">pantas</span>.
           </h1>
@@ -39,21 +36,18 @@ export default function JualPage() {
         {/* Section 2: Yang Anda Dapatkan */}
         <div className="grid gap-8 md:grid-cols-3 border-y border-[#14130F]/15 py-14 mb-20">
           <div>
-            <span className="font-mono text-xs uppercase tracking-widest text-[#A8814F] block mb-2">01</span>
             <h3 className="font-display text-2xl text-[#14130F] mb-2">Penilaian yang jujur.</h3>
             <p className="text-sm leading-relaxed text-[#6D675D]">
               Harga ditentukan dari pembanding transaksi di kawasan Anda, bukan dari angka yang ingin didengar.
             </p>
           </div>
           <div>
-            <span className="font-mono text-xs uppercase tracking-widest text-[#A8814F] block mb-2">02</span>
             <h3 className="font-display text-2xl text-[#14130F] mb-2">Pemasaran yang terarah.</h3>
             <p className="text-sm leading-relaxed text-[#6D675D]">
               Foto dan film profesional, ditunjukkan kepada pembeli dan agen mitra yang sudah kami saring.
             </p>
           </div>
           <div>
-            <span className="font-mono text-xs uppercase tracking-widest text-[#A8814F] block mb-2">03</span>
             <h3 className="font-display text-2xl text-[#14130F] mb-2">Kerahasiaan penuh.</h3>
             <p className="text-sm leading-relaxed text-[#6D675D]">
               Alamat tidak pernah dipublikasikan. Kunjungan hanya dengan janji temu dan pendampingan kami.

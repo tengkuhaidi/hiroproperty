@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { PROPERTIES } from '@/data/properties';
 import PropertyGallery from '@/components/PropertyGallery';
 import MobileFloatingCTA from '@/components/MobileFloatingCTA';
+import { TransactionBadge, CategoryBadge } from '@/components/PropertyBadge';
 
 // Generate static params for all properties (SSG Best Practice)
 export function generateStaticParams() {
@@ -32,7 +33,7 @@ export default async function PropertyDetailPage({
       <div className="mx-auto max-w-[1600px] px-6 md:px-12">
         {/* Refined Hierarchical Breadcrumbs (The Modern House / Inigo standard) */}
         <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[#6D675D]">
+          <ol className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[#6D675D]">
             <li>
               <Link href="/" className="hover:text-[#14130F] transition-colors">
                 Index
@@ -71,7 +72,7 @@ export default async function PropertyDetailPage({
             <h1 className="font-display text-[clamp(2.6rem,6vw,5.5rem)] leading-none text-[#14130F]">
               {property.title}
             </h1>
-            <p className="mt-2 text-xs font-mono tracking-widest text-[#6D675D] uppercase">
+            <p className="mt-2 text-xs tracking-widest text-[#6D675D] uppercase">
               {property.code || 'HP-001'} · {property.location}
             </p>
           </div>
@@ -123,7 +124,7 @@ export default async function PropertyDetailPage({
           <div className="lg:col-span-8 space-y-12">
             {property.curatorNote && (
               <div className="rounded-xl border border-[#A8814F]/30 bg-[#A8814F]/5 p-6 md:p-8">
-                <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#A8814F] font-semibold mb-2">
+                <p className="text-[11px] uppercase tracking-[0.25em] text-[#A8814F] font-semibold mb-2">
                   Curator Note · Catatan Kurator
                 </p>
                 <p className="font-display text-lg md:text-xl text-[#14130F] leading-snug">
@@ -207,18 +208,10 @@ export default async function PropertyDetailPage({
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  {/* Paired Badges (Option 2: Transaction & Asset Category) */}
+                  {/* Transaction & Category Badges */}
                   <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10 pointer-events-none">
-                    <span className={`rounded-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase backdrop-blur-md border ${
-                      sp.tag === 'FOR RENT'
-                        ? 'bg-[#090A0B]/85 text-white/90 border-white/10'
-                        : 'bg-[#090A0B]/85 text-[#D4AF37] border-[#D4AF37]/30'
-                    }`}>
-                      {sp.tag || 'FOR SALE'}
-                    </span>
-                    <span className="rounded-md bg-[#090A0B]/80 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase text-white/90 border border-white/10">
-                      {sp.category}
-                    </span>
+                    <TransactionBadge tag={sp.tag} />
+                    <CategoryBadge category={sp.category} />
                   </div>
                 </div>
                 <div className="mt-4 flex items-start justify-between">

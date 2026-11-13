@@ -104,7 +104,7 @@ export default function PropertyGallery({ title, image, gallery, video }: Proper
 
         {/* Quiet Minimal Floating Counter (The Modern House signature) */}
         <div className="absolute bottom-4 right-5 z-10 pointer-events-none">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#090A0B]/80 backdrop-blur-md px-3.5 py-1 text-[11px] font-mono tracking-widest uppercase text-white border border-white/10 shadow-sm">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#090A0B]/80 backdrop-blur-sm px-3.5 py-1 text-[11px] font-mono tracking-widest uppercase text-white border border-white/10 shadow-sm">
             <span>{String(mobileIndex + 1).padStart(2, '0')}</span>
             <span className="text-white/40">/</span>
             <span className="text-white/60">{String(allImages.length).padStart(2, '0')}</span>
@@ -115,7 +115,7 @@ export default function PropertyGallery({ title, image, gallery, video }: Proper
         <button
           type="button"
           onClick={() => openLightbox(mobileIndex)}
-          className="absolute bottom-4 left-5 z-10 inline-flex items-center gap-1.5 rounded-full bg-[#090A0B]/75 backdrop-blur-md px-3 py-1 text-[10px] font-mono uppercase tracking-wider text-white/90 border border-white/10"
+          className="absolute bottom-4 left-5 z-10 inline-flex items-center gap-1.5 rounded-full bg-[#090A0B]/75 backdrop-blur-sm px-3 py-1 text-[10px] uppercase tracking-wider text-white/90 border border-white/10"
         >
           <svg className="w-3 h-3 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />

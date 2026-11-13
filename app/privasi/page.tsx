@@ -12,7 +12,7 @@ export default function PrivasiPage() {
       <div className="mx-auto max-w-[900px] px-6 md:px-12">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[#6D675D]">
+          <ol className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[#6D675D]">
             <li>
               <Link href="/" className="hover:text-[#14130F] transition-colors">
                 Index

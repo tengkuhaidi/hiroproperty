@@ -34,7 +34,7 @@ export default function MobileFloatingCTA({ title, price, location, code }: Mobi
     <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#090A0B]/95 backdrop-blur-md border-t border-white/10 px-6 py-3.5 shadow-2xl">
       <div className="flex items-center justify-between gap-4">
         <div className="min-w-0">
-          <span className="text-[10px] uppercase tracking-widest text-[#A8814F] block font-mono">Asking Price</span>
+          <span className="text-[10px] uppercase tracking-widest text-[#A8814F] block">Asking Price</span>
           <p className="font-display text-lg text-white font-normal truncate">{price}</p>
         </div>
         <a

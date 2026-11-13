@@ -9,6 +9,7 @@ import { PROPERTIES } from '@/data/properties';
 import HeroFrame from '@/components/motion/HeroFrame';
 import SplitText from '@/components/motion/SplitText';
 import FadeInView from '@/components/motion/FadeInView';
+import { TransactionBadge, CategoryBadge } from '@/components/PropertyBadge';
 
 export default function HomePage() {
   const router = useRouter();
@@ -118,7 +119,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 0.85, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="mb-4 text-xs font-mono uppercase tracking-[0.3em] text-[#D4AF37]"
+              className="mb-4 text-xs uppercase tracking-[0.3em] text-[#D4AF37]"
             >
               Private Real Estate · Jabodetabek &amp; Bandung
             </motion.p>
@@ -136,7 +137,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.7, ease: [0.25, 1, 0.5, 1] }}
-              className="w-full max-w-3xl rounded-2xl bg-[#12110E]/80 p-3 sm:p-4 backdrop-blur-2xl border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+              className="w-full max-w-3xl rounded-2xl bg-[#12110E]/80 p-3 sm:p-4 backdrop-blur-xl border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
             >
               <div className="flex items-center gap-1 sm:gap-2 border-b border-white/10 pb-3 mb-3">
                 {tabs.map((tab) => {
@@ -191,7 +192,6 @@ export default function HomePage() {
       <section className="mx-auto max-w-[1600px] px-6 py-24 md:px-12 md:py-32">
         <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#14130F]/15 pb-8">
           <div>
-            <p className="text-xs uppercase tracking-[0.35em] text-[#6D675D] mb-2 font-semibold font-mono">Curated Portfolio</p>
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#14130F]">
               Baru di <span className="italic">Koleksi</span>.
             </h2>
@@ -222,16 +222,8 @@ export default function HomePage() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10 pointer-events-none">
-                    <span className={`rounded-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase backdrop-blur-md border ${
-                      prop.tag === 'FOR RENT'
-                        ? 'bg-[#090A0B]/85 text-white/90 border-white/10'
-                        : 'bg-[#090A0B]/85 text-[#D4AF37] border-[#D4AF37]/30'
-                    }`}>
-                      {prop.tag || 'FOR SALE'}
-                    </span>
-                    <span className="rounded-md bg-[#090A0B]/80 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase text-white/90 border border-white/10">
-                      {prop.category}
-                    </span>
+                    <TransactionBadge tag={prop.tag} />
+                    <CategoryBadge category={prop.category} />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
@@ -260,7 +252,6 @@ export default function HomePage() {
       <section className="bg-white/50 border-y border-[#14130F]/10 py-24 md:py-32">
         <div className="mx-auto max-w-[1600px] px-6 md:px-12">
           <div className="mb-14 max-w-2xl">
-            <p className="text-xs uppercase tracking-[0.35em] text-[#A8814F] mb-2 font-semibold font-mono">Curator&apos;s Selection</p>
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#14130F]">
               Pilihan <span className="italic">Kurator</span>.
             </h2>
@@ -282,7 +273,7 @@ export default function HomePage() {
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="rounded-md bg-[#090A0B]/85 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase text-[#D4AF37] border border-[#D4AF37]/30">
+                      <span className="rounded-md bg-[#090A0B]/80 px-2.5 py-1 text-[10px] tracking-wide uppercase text-[#D4AF37] border border-[#D4AF37]/30">
                         {prop.code || 'HP-001'}
                       </span>
                     </div>
@@ -330,9 +321,6 @@ export default function HomePage() {
 
         <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-12">
           <div className="max-w-xl">
-            <p className="text-xs font-mono uppercase tracking-[0.35em] text-[#D4AF37] mb-3 font-semibold">
-              Sell with Hiro · Jual Bersama Hiro
-            </p>
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white leading-tight mb-6">
               Menjual rumah Anda dengan <span className="italic">tenang</span>.
             </h2>
@@ -365,7 +353,6 @@ export default function HomePage() {
          ───────────────────────────────────────────────────────────── */}
       <section className="mx-auto max-w-[1600px] px-6 py-24 md:px-12 md:py-32">
         <div className="mb-14 max-w-2xl">
-          <p className="text-xs uppercase tracking-[0.35em] text-[#6D675D] mb-2 font-semibold font-mono">Neighbourhoods</p>
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#14130F]">
             Kawasan yang kami kenal dari <span className="italic">dekat</span>.
           </h2>
@@ -391,7 +378,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#12110E]/90 via-[#12110E]/40 to-transparent" />
 
                 <div className="relative z-10 flex h-full flex-col justify-end text-[#F4F1EC]">
-                  <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#D4AF37] mb-1">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] mb-1">
                     {area.city}
                   </p>
                   <h3 className="font-display text-3xl text-white mb-2 group-hover:text-[#D4AF37] transition-colors">
@@ -413,7 +400,6 @@ export default function HomePage() {
       <section className="bg-[#12110E] py-24 text-[#F4F1EC] md:py-32">
         <div className="mx-auto max-w-[1600px] px-6 md:px-12">
           <div className="mb-16 max-w-2xl">
-            <p className="text-xs font-mono uppercase tracking-[0.35em] text-[#D4AF37] mb-3 font-semibold">Our Principles</p>
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white">
               Cara kami <span className="italic">bekerja</span>.
             </h2>
@@ -421,21 +407,18 @@ export default function HomePage() {
 
           <div className="grid gap-8 md:grid-cols-3 border-t border-white/15 pt-12">
             <div>
-              <span className="font-mono text-xs uppercase tracking-widest text-[#D4AF37] block mb-3">01 · Discretion</span>
               <h3 className="font-display text-2xl md:text-3xl text-white mb-3">Kerahasiaan sejak awal.</h3>
               <p className="text-sm leading-relaxed text-[#F4F1EC]/70">
                 Alamat pemilik tidak dipublikasikan ke sembarang orang; kunjungan hanya dilakukan setelah verifikasi jadwal janji temu.
               </p>
             </div>
             <div>
-              <span className="font-mono text-xs uppercase tracking-widest text-[#D4AF37] block mb-3">02 · Reasoned Valuation</span>
               <h3 className="font-display text-2xl md:text-3xl text-white mb-3">Harga yang bisa dijelaskan.</h3>
               <p className="text-sm leading-relaxed text-[#F4F1EC]/70">
                 Setiap rumah kami bandingkan secara objektif dengan transaksi riil di sekitarnya, bukan dari klaim sepihak.
               </p>
             </div>
             <div>
-              <span className="font-mono text-xs uppercase tracking-widest text-[#D4AF37] block mb-3">03 · One Point of Contact</span>
               <h3 className="font-display text-2xl md:text-3xl text-white mb-3">Satu orang yang mendampingi.</h3>
               <p className="text-sm leading-relaxed text-[#F4F1EC]/70">
                 Dari kunjungan pertama hingga penandatanganan akta jual beli di hadapan notaris, Anda didampingi oleh principal yang sama.
@@ -450,7 +433,6 @@ export default function HomePage() {
          ───────────────────────────────────────────────────────────── */}
       <section id="contact" className="mx-auto grid max-w-[1600px] gap-16 px-6 py-24 md:grid-cols-12 md:px-12 md:py-32">
         <div className="md:col-span-5">
-          <p className="text-xs uppercase tracking-[0.35em] text-[#6D675D] mb-3 font-semibold font-mono">Private Search Desk</p>
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#14130F] leading-tight">
             Ceritakan rumah yang <span className="italic">Anda cari</span>.
           </h2>
@@ -477,7 +459,7 @@ export default function HomePage() {
             <form onSubmit={handleCriteriaSubmit} className="rounded-2xl border border-[#14130F]/15 bg-white p-8 md:p-10 shadow-sm space-y-6">
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2 font-mono">Nama Anda</label>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Nama Anda</label>
                   <input
                     type="text"
                     required
@@ -488,7 +470,7 @@ export default function HomePage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2 font-mono">Nomor WhatsApp</label>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Nomor WhatsApp</label>
                   <input
                     type="tel"
                     required
@@ -502,7 +484,7 @@ export default function HomePage() {
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2 font-mono">Kawasan Minat</label>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Kawasan Minat</label>
                   <select
                     value={formArea}
                     onChange={(e) => setFormArea(e.target.value)}
@@ -516,7 +498,7 @@ export default function HomePage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2 font-mono">Rentang Budget</label>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Rentang Budget</label>
                   <select
                     value={formBudget}
                     onChange={(e) => setFormBudget(e.target.value)}
@@ -532,7 +514,7 @@ export default function HomePage() {
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2 font-mono">Kamar Tidur</label>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Kamar Tidur</label>
                   <select
                     value={formBeds}
                     onChange={(e) => setFormBeds(e.target.value)}
@@ -544,7 +526,7 @@ export default function HomePage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2 font-mono">Target Pindah</label>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Target Pindah</label>
                   <select
                     value={formTarget}
                     onChange={(e) => setFormTarget(e.target.value)}

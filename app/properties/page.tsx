@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { PROPERTIES } from '@/data/properties';
+import { TransactionBadge, CategoryBadge } from '@/components/PropertyBadge';
 
 function CatalogContent() {
   const searchParams = useSearchParams();
@@ -44,7 +45,6 @@ function CatalogContent() {
       <div className="mx-auto max-w-[1600px] px-6 md:px-12">
         {/* Page Header */}
         <div className="mb-16">
-          <p className="text-xs uppercase tracking-[0.35em] text-[#6D675D] mb-3 font-semibold">The Collection</p>
           <h1 className="font-display text-[clamp(2.8rem,7vw,6.5rem)] leading-none text-[#14130F]">
             Find your <span className="italic">address</span>.
           </h1>
@@ -103,18 +103,10 @@ function CatalogContent() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                {/* Paired Badges (Option 2: Transaction & Asset Category) */}
+                {/* Transaction & Category Badges */}
                 <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10 pointer-events-none">
-                  <span className={`rounded-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase backdrop-blur-md border ${
-                    prop.tag === 'FOR RENT'
-                      ? 'bg-[#090A0B]/85 text-white/90 border-white/10'
-                      : 'bg-[#090A0B]/85 text-[#D4AF37] border-[#D4AF37]/30'
-                  }`}>
-                    {prop.tag || 'FOR SALE'}
-                  </span>
-                  <span className="rounded-md bg-[#090A0B]/80 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase text-white/90 border border-white/10">
-                    {prop.category}
-                  </span>
+                  <TransactionBadge tag={prop.tag} />
+                  <CategoryBadge category={prop.category} />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
