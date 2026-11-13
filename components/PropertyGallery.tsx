@@ -11,7 +11,7 @@ interface PropertyGalleryProps {
 }
 
 export default function PropertyGallery({ title, image, gallery, video }: PropertyGalleryProps) {
-  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [mobileIndex, setMobileIndex] = useState(0);
   const mobileScrollRef = useRef<HTMLDivElement>(null);
@@ -20,11 +20,11 @@ export default function PropertyGallery({ title, image, gallery, video }: Proper
 
   const openLightbox = (index: number) => {
     setCurrentIndex(index);
-    setLightboxOpen(true);
+    dialogRef.current?.showModal();
   };
 
   const closeLightbox = () => {
-    setLightboxOpen(false);
+    dialogRef.current?.close();
   };
 
   const nextImage = (e?: React.MouseEvent) => {
@@ -46,26 +46,17 @@ export default function PropertyGallery({ title, image, gallery, video }: Proper
     }
   };
 
+  // Arrow key navigation only; Esc, focus trap and scroll lock are native to <dialog>
   useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!lightboxOpen) return;
-      if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowRight') setCurrentIndex((prev) => (prev + 1) % allImages.length);
       if (e.key === 'ArrowLeft') setCurrentIndex((prev) => (prev - 1 + allImages.length) % allImages.length);
     };
-
-    if (lightboxOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'unset';
-    };
-  }, [lightboxOpen, allImages.length]);
+    dialog.addEventListener('keydown', handleKeyDown);
+    return () => dialog.removeEventListener('keydown', handleKeyDown);
+  }, [allImages.length]);
 
   return (
     <>
@@ -198,92 +189,84 @@ export default function PropertyGallery({ title, image, gallery, video }: Proper
         </div>
       )}
 
-      {/* 3. FULLSCREEN LIGHTBOX MODAL */}
-      {lightboxOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          onClick={closeLightbox}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#090A0B]/95 backdrop-blur-md p-4 sm:p-8"
-        >
-          {/* Top Controls */}
-          <div className="absolute top-6 inset-x-6 flex items-center justify-between text-white z-10">
-            <span className="text-xs tracking-widest uppercase font-mono text-[#D4AF37]">
-              {String(currentIndex + 1).padStart(2, '0')} / {String(allImages.length).padStart(2, '0')} · {title}
-            </span>
+      {/* 3. FULLSCREEN LIGHTBOX MODAL (native <dialog>: browser provides inert page, focus trap, top layer, Esc/back-gesture dismissal) */}
+      <dialog
+        ref={dialogRef}
+        {...({ closedby: 'any' } as React.DialogHTMLAttributes<HTMLDialogElement>)}
+        aria-label={`${title} photo gallery`}
+        className="m-0 max-w-none w-full h-full max-h-none bg-[#090A0B]/95 backdrop-blur-md p-4 sm:p-8 open:flex open:items-center open:justify-center"
+      >
+        {/* Top Controls */}
+        <div className="absolute top-6 inset-x-6 flex items-center justify-between text-white z-10">
+          <span className="text-xs tracking-widest uppercase font-mono text-[#D4AF37]">
+            {String(currentIndex + 1).padStart(2, '0')} / {String(allImages.length).padStart(2, '0')} · {title}
+          </span>
+          <button
+            type="button"
+            onClick={closeLightbox}
+            className="p-2 text-white/70 hover:text-white transition-colors"
+            aria-label="Close lightbox"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Current Active Image */}
+        <div className="relative w-full max-w-5xl max-h-[80vh] h-[75vh] flex items-center justify-center">
+          <Image
+            src={allImages[currentIndex]}
+            alt={`${title} fullscreen frame ${currentIndex + 1}`}
+            fill
+            className="object-contain"
+            sizes="100vw"
+            priority
+          />
+        </div>
+
+        {/* Prev / Next Controls */}
+        {allImages.length > 1 && (
+          <>
             <button
               type="button"
-              onClick={closeLightbox}
-              className="p-2 text-white/70 hover:text-white transition-colors"
-              aria-label="Close lightbox"
+              onClick={prevImage}
+              className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 p-3 text-white/70 hover:text-white transition-colors"
+              aria-label="Previous photo"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12" />
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M15 19l-7-7 7-7" />
               </svg>
             </button>
-          </div>
+            <button
+              type="button"
+              onClick={nextImage}
+              className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 p-3 text-white/70 hover:text-white transition-colors"
+              aria-label="Next photo"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </>
+        )}
 
-          {/* Current Active Image */}
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-5xl max-h-[80vh] h-[75vh] flex items-center justify-center"
-          >
-            <Image
-              src={allImages[currentIndex]}
-              alt={`${title} fullscreen frame ${currentIndex + 1}`}
-              fill
-              className="object-contain"
-              sizes="100vw"
-              priority
-            />
-          </div>
-
-          {/* Prev / Next Controls */}
-          {allImages.length > 1 && (
-            <>
-              <button
-                type="button"
-                onClick={prevImage}
-                className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 p-3 text-white/70 hover:text-white transition-colors"
-                aria-label="Previous photo"
-              >
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={nextImage}
-                className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 p-3 text-white/70 hover:text-white transition-colors"
-                aria-label="Next photo"
-              >
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </>
-          )}
-
-          {/* Bottom Thumbnails Strip */}
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="absolute bottom-4 inset-x-4 flex justify-center gap-2 overflow-x-auto py-2 no-scrollbar"
-          >
-            {allImages.map((img, idx) => (
-              <button
-                type="button"
-                key={idx}
-                onClick={() => setCurrentIndex(idx)}
-                className={`relative h-12 w-16 flex-shrink-0 overflow-hidden rounded border transition-all ${
-                  currentIndex === idx ? 'border-[#D4AF37] opacity-100' : 'border-white/10 opacity-40 hover:opacity-80'
-                }`}
-              >
-                <Image src={img} alt={`thumb ${idx}`} fill className="object-cover" />
-              </button>
-            ))}
-          </div>
+        {/* Bottom Thumbnails Strip */}
+        <div className="absolute bottom-4 inset-x-4 flex justify-center gap-2 overflow-x-auto py-2 no-scrollbar">
+          {allImages.map((img, idx) => (
+            <button
+              type="button"
+              key={idx}
+              onClick={() => setCurrentIndex(idx)}
+              className={`relative h-12 w-16 flex-shrink-0 overflow-hidden rounded border transition-all ${
+                currentIndex === idx ? 'border-[#D4AF37] opacity-100' : 'border-white/10 opacity-40 hover:opacity-80'
+              }`}
+            >
+              <Image src={img} alt={`thumb ${idx}`} fill className="object-cover" />
+            </button>
+          ))}
         </div>
-      )}
+      </dialog>
     </>
   );
 }

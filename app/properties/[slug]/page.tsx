@@ -2,16 +2,54 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { PROPERTIES } from '@/data/properties';
 import PropertyGallery from '@/components/PropertyGallery';
 import MobileFloatingCTA from '@/components/MobileFloatingCTA';
 import { TransactionBadge, CategoryBadge } from '@/components/PropertyBadge';
+
+const BASE_URL = 'https://hiroproperty.com';
 
 // Generate static params for all properties (SSG Best Practice)
 export function generateStaticParams() {
   return PROPERTIES.map((prop) => ({
     slug: prop.slug,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const property = PROPERTIES.find((p) => p.slug === slug);
+  if (!property) return {};
+
+  const title = `${property.title} — ${property.location}`;
+  const description =
+    property.curatorNote ||
+    `${property.title} di ${property.location}. ${property.bedrooms} kamar tidur, ${property.bathrooms} kamar mandi, ${property.buildingArea || property.areaSqFt}. Harga: ${property.price}.`;
+  const url = `${BASE_URL}/properties/${property.slug}`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'website',
+      title,
+      description,
+      url,
+      images: [{ url: property.image, width: 1200, height: 750, alt: property.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [property.image],
+    },
+  };
 }
 
 export default async function PropertyDetailPage({
@@ -28,8 +66,39 @@ export default async function PropertyDetailPage({
 
   const similarProperties = PROPERTIES.filter((p) => p.slug !== slug).slice(0, 3);
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateListing',
+    name: property.title,
+    description: property.curatorNote || property.description,
+    url: `${BASE_URL}/properties/${property.slug}`,
+    image: property.gallery && property.gallery.length > 0 ? property.gallery : [property.image],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: property.location,
+      addressCountry: 'ID',
+    },
+    numberOfBedrooms: property.bedrooms,
+    numberOfBathroomsTotal: property.bathrooms,
+    floorSize: {
+      '@type': 'QuantitativeValue',
+      value: property.buildingArea || property.areaSqFt,
+    },
+    offers: {
+      '@type': 'Offer',
+      price: property.priceNumeric,
+      priceCurrency: 'IDR',
+      availability: 'https://schema.org/InStock',
+    },
+  };
+
   return (
     <div className="bg-[#F4F1EC] pt-32 pb-40 text-[#14130F]">
+      {/* JSON-LD structured data: safe, serializes only our own static PROPERTIES data, not user input */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="mx-auto max-w-[1600px] px-6 md:px-12">
         {/* Refined Hierarchical Breadcrumbs (The Modern House / Inigo standard) */}
         <nav aria-label="Breadcrumb" className="mb-8">

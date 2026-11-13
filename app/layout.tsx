@@ -5,10 +5,33 @@ import Footer from '@/components/Footer';
 import GlobalFloatingWA from '@/components/GlobalFloatingWA';
 import SmoothScrollProvider from '@/components/motion/SmoothScrollProvider';
 
+const BASE_URL = 'https://hiroproperty.com';
+const DEFAULT_TITLE = 'Hiro Property — Luxury Real Estate';
+const DEFAULT_DESCRIPTION = 'Private-client real estate advisory for exceptional architectural homes across Jakarta, Bali, and premier international destinations.';
+const DEFAULT_OG_IMAGE = '/images/valley-house/02-exterior-dusk.jpg';
+
 export const metadata: Metadata = {
-  title: 'Hiro Property — Luxury Real Estate',
-  description: 'Private-client real estate advisory for exceptional architectural homes across Jakarta, Bali, and premier international destinations.',
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: DEFAULT_TITLE,
+    template: '%s | Hiro Property',
+  },
+  description: DEFAULT_DESCRIPTION,
   keywords: ['Luxury real estate', 'Hiro Property', 'Off-market properties', 'Jakarta luxury home', 'Bali architectural villa'],
+  openGraph: {
+    type: 'website',
+    siteName: 'Hiro Property',
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    url: BASE_URL,
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 750, alt: DEFAULT_TITLE }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
+  },
 };
 
 export default function RootLayout({

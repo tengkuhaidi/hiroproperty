@@ -59,3 +59,12 @@ html {
     border-radius: 3px;
   }
 }
+
+/* Gallery lightbox <dialog>: contain scroll so backdrop/content scroll never chains to the page behind it */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
