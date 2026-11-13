@@ -27,7 +27,7 @@ export default function MobileFloatingCTA({ title, price, location, code }: Mobi
 
   if (!visible) return null;
 
-  const waMsg = `Selamat siang Hiro Property, saya tertarik dengan ${code || 'HP-001'}, ${title} (${location}). Mohon info jadwal kunjungan pribadi.`;
+  const waMsg = `Hello Hiro Property, I'm interested in ${code || 'HP-001'}, ${title} (${location}). Please share your private viewing schedule.`;
   const waLink = `https://wa.me/6285176828199?text=${encodeURIComponent(waMsg)}`;
 
   return (

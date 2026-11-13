@@ -2,8 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import GlobalFloatingWA from '@/components/GlobalFloatingWA';
-import SmoothScrollProvider from '@/components/motion/SmoothScrollProvider';
 
 const BASE_URL = 'https://hiroproperty.com';
 const DEFAULT_TITLE = 'Hiro Property — Luxury Real Estate';
@@ -50,14 +48,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#F4F1EC] text-[#14130F] font-body selection:bg-[#14130F] selection:text-[#F4F1EC]">
-        <SmoothScrollProvider>
-          <Header />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
-          <GlobalFloatingWA />
-        </SmoothScrollProvider>
+        <Header />
+        <main className="min-h-screen">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

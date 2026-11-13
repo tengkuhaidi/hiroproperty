@@ -2,8 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Kebijakan Privasi · Hiro Property',
-  description: 'Kebijakan privasi dan perlindungan data pribadi sesuai UU No. 27 Tahun 2022 (UU PDP).',
+  title: 'Privacy Policy · Hiro Property',
+  description: 'Privacy policy and personal data protection in accordance with Law No. 27 of 2022 (Indonesian PDP Law).',
 };
 
 export default function PrivasiPage() {
@@ -19,78 +19,78 @@ export default function PrivasiPage() {
               </Link>
             </li>
             <li className="text-[#14130F]/20">/</li>
-            <li className="text-[#14130F]">Kebijakan Privasi</li>
+            <li className="text-[#14130F]">Privacy Policy</li>
           </ol>
         </nav>
 
         <h1 className="font-display text-[clamp(2.4rem,5vw,4.5rem)] text-[#14130F] mb-6">
-          Privasi Anda
+          Your Privacy
         </h1>
 
         <div className="text-base leading-relaxed text-[#6D675D] space-y-6 mb-12">
           <p className="text-lg text-[#14130F]">
-            Kerahasiaan adalah bagian dari cara kami bekerja. Halaman ini menjelaskan data apa yang kami kumpulkan, untuk apa, dan bagaimana Anda dapat mengendalikannya sesuai Undang-Undang Perlindungan Data Pribadi (UU No. 27 Tahun 2022).
+            Discretion is part of how we work. This page explains what data we collect, why, and how you can control it, in accordance with Indonesia's Personal Data Protection Law (Law No. 27 of 2022).
           </p>
         </div>
 
         <div className="border-t border-[#14130F]/15 divide-y divide-[#14130F]/10 text-sm leading-relaxed text-[#6D675D]">
-          {/* 1. Data yang Dikumpulkan */}
+          {/* 1. Data Collected */}
           <div className="py-8">
-            <h3 className="font-display text-xl text-[#14130F] mb-3">1. Data yang Dikumpulkan</h3>
+            <h3 className="font-display text-xl text-[#14130F] mb-3">1. Data We Collect</h3>
             <p>
-              Kami hanya mengumpulkan data yang Anda berikan secara sukarela melalui formulir website atau percakapan WhatsApp:
+              We only collect data you provide voluntarily through our website form or WhatsApp conversations:
             </p>
             <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li>Nama lengkap atau nama sapaan.</li>
-              <li>Nomor WhatsApp dan/atau alamat email untuk korespondensi.</li>
-              <li>Kriteria properti pencarian (kawasan, rentang budget, preferensi tata ruang).</li>
-              <li>Informasi properti bagi pemilik yang menitipkan penjualan (kawasan umum, spesifikasi dasar).</li>
+              <li>Full name or preferred name.</li>
+              <li>WhatsApp number and/or email address for correspondence.</li>
+              <li>Property search criteria (area, budget range, layout preferences).</li>
+              <li>Property information for owners listing a home for sale (general area, basic specifications).</li>
             </ul>
           </div>
 
-          {/* 2. Tujuan Penggunaan */}
+          {/* 2. Purpose of Use */}
           <div className="py-8">
-            <h3 className="font-display text-xl text-[#14130F] mb-3">2. Tujuan Pemrosesan Data</h3>
+            <h3 className="font-display text-xl text-[#14130F] mb-3">2. Purpose of Data Processing</h3>
             <p>
-              Data Anda digunakan semata-mata untuk:
+              Your data is used solely to:
             </p>
             <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li>Mencarikan portofolio properti yang sesuai dengan kriteria pribadi Anda.</li>
-              <li>Menghubungi Anda kembali untuk konfirmasi jadwal kunjungan (*private viewing*).</li>
-              <li>Menyampaikan laporan penilaian harga properti tertulis bagi pemilik.</li>
+              <li>Find properties from our portfolio matching your personal criteria.</li>
+              <li>Contact you to confirm private viewing appointments.</li>
+              <li>Deliver written property valuation reports to owners.</li>
             </ul>
           </div>
 
-          {/* 3. Pemroses Data */}
+          {/* 3. Data Processors */}
           <div className="py-8">
-            <h3 className="font-display text-xl text-[#14130F] mb-3">3. Pemroses &amp; Kerahasiaan Sistem</h3>
+            <h3 className="font-display text-xl text-[#14130F] mb-3">3. Data Processors &amp; System Confidentiality</h3>
             <p>
-              Data diproses secara internal oleh tim principal Hiro Property dan infrastruktur asisten digital resmi kami yang terenkripsi. Kami tidak menggunakan broker data pihak ketiga.
+              Data is processed internally by the Hiro Property principal team and our encrypted official digital assistant infrastructure. We do not use third-party data brokers.
             </p>
           </div>
 
-          {/* 4. Pembagian Data */}
+          {/* 4. Data Sharing */}
           <div className="py-8">
-            <h3 className="font-display text-xl text-[#14130F] mb-3">4. Pembagian Data ke Pihak Luar</h3>
+            <h3 className="font-display text-xl text-[#14130F] mb-3">4. Sharing Data with External Parties</h3>
             <p>
-              <strong>Data Anda tidak pernah dijual atau disewakan ke pihak lain.</strong> Informasi hanya diteruskan kepada pemilik rumah atau rekanan notaris/PPAT yang ditunjuk bila Anda secara eksplisit meminta pengajuan penawaran atau pembuatan akta.
+              <strong>Your data is never sold or rented to any other party.</strong> Information is only passed on to a homeowner or an appointed notary/PPAT partner when you explicitly request an offer submission or deed preparation.
             </p>
           </div>
 
-          {/* 5. Hak Pemilik Data */}
+          {/* 5. Data Subject Rights */}
           <div className="py-8">
-            <h3 className="font-display text-xl text-[#14130F] mb-3">5. Hak Anda (Akses &amp; Penghapusan)</h3>
+            <h3 className="font-display text-xl text-[#14130F] mb-3">5. Your Rights (Access &amp; Deletion)</h3>
             <p>
-              Sesuai UU PDP, Anda berhak sewaktu-waktu meminta salinan data, pembaharuan, atau penghapusan menyeluruh data kontak Anda dari buku catatan kami cukup dengan mengirim pesan ke Private Desk.
+              Under the PDP Law, you may at any time request a copy of your data, request an update, or request complete deletion of your contact data from our records simply by messaging the Private Desk.
             </p>
           </div>
 
-          {/* 6. Kontak Pengelola Data */}
+          {/* 6. Data Controller Contact */}
           <div className="py-8">
-            <h3 className="font-display text-xl text-[#14130F] mb-3">6. Kontak Pengelola Data</h3>
+            <h3 className="font-display text-xl text-[#14130F] mb-3">6. Data Controller Contact</h3>
             <p>
               PT Hiro Properti Indonesia<br />
-              Attn: Tim Kepatuhan Privasi (Private Client Desk)<br />
+              Attn: Privacy Compliance Team (Private Client Desk)<br />
               Email:{' '}
               <a href="mailto:private@hiroproperty.com" className="text-[#A8814F] underline">
                 private@hiroproperty.com

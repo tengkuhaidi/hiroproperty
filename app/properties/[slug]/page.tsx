@@ -244,7 +244,7 @@ export default async function PropertyDetailPage({
             </p>
 
             <a
-              href={`https://wa.me/6285176828199?text=${encodeURIComponent(`Selamat siang Hiro Property, saya tertarik dengan ${property.code || 'HP-001'}, ${property.title} (${property.location}). Mohon info jadwal kunjungan pribadi.`)}`}
+              href={`https://wa.me/6285176828199?text=${encodeURIComponent(`Hello Hiro Property, I'm interested in ${property.code || 'HP-001'}, ${property.title} (${property.location}). Please share your private viewing schedule.`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="block w-full text-center rounded-xl bg-[#12110E] py-4 text-xs font-semibold uppercase tracking-wider text-white transition-all hover:bg-[#A8814F] shadow-lg mb-3"

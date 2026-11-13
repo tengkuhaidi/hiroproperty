@@ -20,9 +20,9 @@ export default function HomePage() {
   const [formName, setFormName] = useState('');
   const [formWA, setFormWA] = useState('');
   const [formArea, setFormArea] = useState('Pondok Indah');
-  const [formBudget, setFormBudget] = useState('Rp5–10 M');
-  const [formBeds, setFormBeds] = useState('4+ Kamar');
-  const [formTarget, setFormTarget] = useState('Segera (1–3 Bulan)');
+  const [formBudget, setFormBudget] = useState('Rp5–10 B');
+  const [formBeds, setFormBeds] = useState('4+ Bedrooms');
+  const [formTarget, setFormTarget] = useState('Soon (1–3 Months)');
   const [formSent, setFormSent] = useState(false);
 
   const tabs = [
@@ -31,39 +31,39 @@ export default function HomePage() {
     { id: 'NEW ESTATES', label: 'New Developments' },
   ] as const;
 
-  // 1. Baru di Koleksi (6 Kartu)
+  // 1. New to the Collection (6 cards)
   const recentCollection = PROPERTIES.slice(0, 6);
 
-  // 2. Pilihan Kurator (3 Kartu Unggulan)
+  // 2. Curator's Picks (3 featured cards)
   const curatorPicks = PROPERTIES.slice(0, 3);
 
-  // 3. Kawasan Aktif
+  // 3. Active Neighbourhoods
   const activeAreas = [
     {
       name: 'Menteng',
-      city: 'Jakarta Pusat',
-      character: 'Kawasan diplomatik bersejarah, jalan rindang, privasi tinggi.',
+      city: 'Central Jakarta',
+      character: 'A historic diplomatic enclave with tree-lined streets and exceptional privacy.',
       query: 'Menteng',
       image: '/images/night.jpg',
     },
     {
       name: 'Pondok Indah',
-      city: 'Jakarta Selatan',
-      character: 'Jalan lebar, kavling besar, dekat sekolah internasional & mall.',
+      city: 'South Jakarta',
+      character: 'Wide avenues, large lots, close to international schools and malls.',
       query: 'Kota Kasablanka',
       image: 'https://casagranderesidences.co.id/wp-content/uploads/2026/10/1001001873.jpg',
     },
     {
       name: 'Cigadung & Dago',
       city: 'Bandung',
-      character: 'Udara sejuk lereng lembah, pemandangan sawah alami, arsitektur villa kontemporer.',
+      character: 'Cool valley-slope air, natural rice-field views, contemporary villa architecture.',
       query: 'Cigadung',
       image: '/images/valley-house/02-exterior-dusk.jpg',
     },
     {
       name: 'Bintaro & BSD',
-      city: 'Tangerang Selatan',
-      character: 'Perencanaan kota modern, akses tol langsung, komunitas mandiri tertata.',
+      city: 'South Tangerang',
+      character: 'Modern city planning, direct toll access, well-organised self-contained communities.',
       query: 'Jakarta Selatan',
       image: 'https://casagranderesidences.co.id/wp-content/uploads/2026/10/IMG-20261015-WA0010.jpg',
     },
@@ -84,7 +84,7 @@ export default function HomePage() {
 
   const handleCriteriaSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = `Halo Private Desk Hiro Property, nama saya ${formName || 'Klien'} (WA: ${formWA}). Saya mencari properti dengan kriteria:\n- Kawasan: ${formArea}\n- Budget: ${formBudget}\n- Kamar: ${formBeds}\n- Target Pindah: ${formTarget}\n\nMohon info kurasi rumah yang sesuai.`;
+    const msg = `Hello Hiro Property Private Desk, my name is ${formName || 'a prospective client'} (WhatsApp: ${formWA}). I'm looking for a property with these criteria:\n- Area: ${formArea}\n- Budget: ${formBudget}\n- Bedrooms: ${formBeds}\n- Move-in target: ${formTarget}\n\nPlease share curated homes matching this brief.`;
     window.open(`https://wa.me/6285176828199?text=${encodeURIComponent(msg)}`, '_blank');
     setFormSent(true);
   };
@@ -92,7 +92,7 @@ export default function HomePage() {
   return (
     <div className="bg-[#F4F1EC] text-[#14130F]">
       {/* ─────────────────────────────────────────────────────────────
-          SECTION 1: HERO (Satu foto rumah riil layar penuh)
+          SECTION 1: HERO (one full-screen real property photo)
          ───────────────────────────────────────────────────────────── */}
       <section className="relative h-[100svh] min-h-[700px] overflow-hidden bg-[#12110E] p-3 md:p-4">
         <HeroFrame>
@@ -171,14 +171,14 @@ export default function HomePage() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Kawasan, jalan, atau kode listing (e.g. Cigadung, Menteng, HP-BDG-001)..."
+                  placeholder="Neighbourhood, street, or listing code (e.g. Cigadung, Menteng, HP-BDG-001)..."
                   className="flex-1 rounded-xl bg-white/10 px-4 py-3 text-sm text-white placeholder-white/40 backdrop-blur-md border border-white/10 focus:border-white/30 focus:outline-none"
                 />
                 <button
                   type="submit"
                   className="rounded-xl bg-white px-8 py-3 text-xs font-semibold uppercase tracking-wider text-[#12110E] hover:bg-[#F4F1EC] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg whitespace-nowrap"
                 >
-                  Telusuri Koleksi &rarr;
+                  Browse Collection &rarr;
                 </button>
               </form>
             </motion.div>
@@ -193,18 +193,18 @@ export default function HomePage() {
         <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#14130F]/15 pb-8">
           <div>
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#14130F]">
-              Baru di <span className="italic">Koleksi</span>.
+              New to the <span className="italic">Collection</span>.
             </h2>
           </div>
           <div className="flex flex-col items-start md:items-end">
             <p className="text-sm text-[#6D675D] max-w-md md:text-right mb-2">
-              Rumah yang baru kami terima. Beberapa lainnya hanya kami tunjukkan secara pribadi atas permintaan pemilik.
+              Homes we've just taken on. Some others we only show privately, at the owner's request.
             </p>
             <Link
               href="/properties"
               className="text-xs font-semibold uppercase tracking-wider text-[#14130F] hover:text-[#A8814F] transition-colors inline-flex items-center gap-2 group"
             >
-              Lihat seluruh koleksi <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
+              View the full collection <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
             </Link>
           </div>
         </div>
@@ -233,7 +233,7 @@ export default function HomePage() {
                       {prop.title}
                     </h3>
                     <p className="text-xs text-[#6D675D] mt-1 tracking-wide">
-                      {prop.location} · {prop.bedrooms} Kamar · {prop.areaSqFt}
+                      {prop.location} · {prop.bedrooms} Bed · {prop.areaSqFt}
                     </p>
                   </div>
                   <p className="font-display text-xl font-normal text-[#14130F] whitespace-nowrap">
@@ -247,16 +247,16 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          SECTION 3: PILIHAN KURATOR (3 Kartu Besar dengan Alasan Kuratorial)
+          SECTION 3: CURATOR'S PICKS (3 large cards with curatorial reasoning)
          ───────────────────────────────────────────────────────────── */}
       <section className="bg-white/50 border-y border-[#14130F]/10 py-24 md:py-32">
         <div className="mx-auto max-w-[1600px] px-6 md:px-12">
           <div className="mb-14 max-w-2xl">
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#14130F]">
-              Pilihan <span className="italic">Kurator</span>.
+              Curator's <span className="italic">Picks</span>.
             </h2>
             <p className="mt-4 text-sm text-[#6D675D] leading-relaxed">
-              Rumah yang menurut kami paling bernilai saat ini, karena rasio harga terhadap kawasan, lokasi langka, atau karakter arsitekturnya.
+              The homes we currently consider most compelling — for their price-to-location ratio, rare position, or architectural character.
             </p>
           </div>
 
@@ -292,10 +292,10 @@ export default function HomePage() {
                     {prop.location} · {prop.areaSqFt}
                   </p>
 
-                  {/* 1 Kalimat Alasan Kurator */}
+                  {/* One-sentence curator's reason */}
                   <div className="mt-auto border-t border-[#14130F]/10 pt-4">
                     <p className="text-xs text-[#14130F]/85 italic leading-relaxed">
-                      &ldquo;{prop.curatorNote || 'Rasio harga per meter persegi tanah sangat kompetitif terhadap tren transaksi riil di kawasannya.'}&rdquo;
+                      &ldquo;{prop.curatorNote || "An exceptionally competitive price per square metre of land against real transactions in the area."}&rdquo;
                     </p>
                   </div>
                 </div>
@@ -322,10 +322,10 @@ export default function HomePage() {
         <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-12">
           <div className="max-w-xl">
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white leading-tight mb-6">
-              Menjual rumah Anda dengan <span className="italic">tenang</span>.
+              Sell your home with <span className="italic">peace of mind</span>.
             </h2>
             <p className="text-base leading-relaxed text-[#F4F1EC]/75 mb-8">
-              Kami memasarkan secara terarah, kepada pembeli yang sudah kami kenal kemampuannya. Alamat Anda tidak pernah dipublikasikan; kunjungan hanya dilakukan dengan janji temu dan pendampingan principal.
+              We market with intent, to buyers whose capacity we already know. Your address is never published; viewings happen only by appointment, with a principal always present.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
@@ -333,15 +333,15 @@ export default function HomePage() {
                 href="/jual"
                 className="rounded-full bg-white px-8 py-3.5 text-xs font-semibold uppercase tracking-wider text-[#12110E] hover:bg-[#F4F1EC] transition-all hover:scale-105 active:scale-95 shadow-lg"
               >
-                Pelajari Titip Jual &rarr;
+                Learn About Selling with Us &rarr;
               </Link>
               <a
-                href="https://wa.me/6285176828199?text=Selamat%20siang%20Hiro%20Property,%20saya%20pemilik%20rumah%20dan%20ingin%20berkonsultasi%20penilaian%20harga%20secara%20pribadi."
+                href="https://wa.me/6285176828199?text=Hello%20Hiro%20Property,%20I%20own%20a%20home%20and%20would%20like%20a%20private%20valuation%20consultation."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-full border border-white/20 px-8 py-3.5 text-xs font-semibold uppercase tracking-wider text-white hover:bg-white/10 transition-all"
               >
-                Minta Penilaian Pribadi
+                Request a Private Valuation
               </a>
             </div>
           </div>
@@ -354,10 +354,10 @@ export default function HomePage() {
       <section className="mx-auto max-w-[1600px] px-6 py-24 md:px-12 md:py-32">
         <div className="mb-14 max-w-2xl">
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#14130F]">
-            Kawasan yang kami kenal dari <span className="italic">dekat</span>.
+            Neighbourhoods we know <span className="italic">closely</span>.
           </h2>
           <p className="mt-4 text-sm text-[#6D675D] leading-relaxed">
-            Hanya kawasan yang memiliki transaksi dan listing aktif yang kami tampilkan. Setiap kawasan memiliki karakter ruang dan ritme hidup yang berbeda.
+            We only feature neighbourhoods with active transactions and listings. Each one has its own spatial character and rhythm of life.
           </p>
         </div>
 
@@ -401,27 +401,27 @@ export default function HomePage() {
         <div className="mx-auto max-w-[1600px] px-6 md:px-12">
           <div className="mb-16 max-w-2xl">
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white">
-              Cara kami <span className="italic">bekerja</span>.
+              How we <span className="italic">work</span>.
             </h2>
           </div>
 
           <div className="grid gap-8 md:grid-cols-3 border-t border-white/15 pt-12">
             <div>
-              <h3 className="font-display text-2xl md:text-3xl text-white mb-3">Kerahasiaan sejak awal.</h3>
+              <h3 className="font-display text-2xl md:text-3xl text-white mb-3">Discretion from the start.</h3>
               <p className="text-sm leading-relaxed text-[#F4F1EC]/70">
-                Alamat pemilik tidak dipublikasikan ke sembarang orang; kunjungan hanya dilakukan setelah verifikasi jadwal janji temu.
+                The owner's address is never published to just anyone; viewings happen only after a scheduled appointment is confirmed.
               </p>
             </div>
             <div>
-              <h3 className="font-display text-2xl md:text-3xl text-white mb-3">Harga yang bisa dijelaskan.</h3>
+              <h3 className="font-display text-2xl md:text-3xl text-white mb-3">Pricing you can trust.</h3>
               <p className="text-sm leading-relaxed text-[#F4F1EC]/70">
-                Setiap rumah kami bandingkan secara objektif dengan transaksi riil di sekitarnya, bukan dari klaim sepihak.
+                We benchmark every home objectively against real nearby transactions, never a one-sided claim.
               </p>
             </div>
             <div>
-              <h3 className="font-display text-2xl md:text-3xl text-white mb-3">Satu orang yang mendampingi.</h3>
+              <h3 className="font-display text-2xl md:text-3xl text-white mb-3">One person, all the way.</h3>
               <p className="text-sm leading-relaxed text-[#F4F1EC]/70">
-                Dari kunjungan pertama hingga penandatanganan akta jual beli di hadapan notaris, Anda didampingi oleh principal yang sama.
+                From the first viewing to signing the deed before a notary, you're accompanied by the same principal throughout.
               </p>
             </div>
           </div>
@@ -429,48 +429,48 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          SECTION 7: PENUTUP (Form Sampaikan Kriteria Anda)
+          SECTION 7: CLOSING (Tell Us Your Criteria form)
          ───────────────────────────────────────────────────────────── */}
       <section id="contact" className="mx-auto grid max-w-[1600px] gap-16 px-6 py-24 md:grid-cols-12 md:px-12 md:py-32">
         <div className="md:col-span-5">
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#14130F] leading-tight">
-            Ceritakan rumah yang <span className="italic">Anda cari</span>.
+            Tell us about the home <span className="italic">you're looking for</span>.
           </h2>
           <p className="mt-6 text-sm leading-relaxed text-[#6D675D]">
-            Kami akan menghubungi Anda secara pribadi, sering kali sebelum rumahnya tampil di website ini. Sebagian portofolio terbaik kami hanya diperlihatkan secara privat.
+            We'll reach out to you personally, often before a home appears on this website. Some of our best listings are shown privately only.
           </p>
 
           <div className="mt-10 border-t border-[#14130F]/15 pt-6 space-y-2 text-xs text-[#6D675D]">
             <p className="font-semibold text-[#14130F] uppercase tracking-wider">Direct WhatsApp Desk</p>
             <p className="font-mono text-sm text-[#14130F]">+62 851-7682-8199</p>
-            <p>Senin – Sabtu, 09.00 – 18.00 WIB</p>
+            <p>Monday – Saturday, 09:00 – 18:00 (WIB)</p>
           </div>
         </div>
 
         <div className="md:col-span-7">
           {formSent ? (
             <div className="rounded-2xl border border-black/10 bg-white p-10 text-center shadow-lg">
-              <h3 className="font-display text-3xl text-[#14130F]">Kriteria Terkirim</h3>
+              <h3 className="font-display text-3xl text-[#14130F]">Criteria Sent</h3>
               <p className="mt-3 text-sm text-[#6D675D] max-w-md mx-auto">
-                Menghubungkan Anda langsung ke Private Desk WhatsApp Hiro Property untuk pencarian terkurasi...
+                Connecting you directly to the Hiro Property Private Desk on WhatsApp for a curated search...
               </p>
             </div>
           ) : (
             <form onSubmit={handleCriteriaSubmit} className="rounded-2xl border border-[#14130F]/15 bg-white p-8 md:p-10 shadow-sm space-y-6">
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Nama Anda</label>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Your Name</label>
                   <input
                     type="text"
                     required
                     value={formName}
                     onChange={(e) => setFormName(e.target.value)}
-                    placeholder="Bapak / Ibu..."
+                    placeholder="Mr. / Mrs...."
                     className="w-full border-b border-[#14130F]/20 bg-transparent py-2.5 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Nomor WhatsApp</label>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">WhatsApp Number</label>
                   <input
                     type="tel"
                     required
@@ -484,7 +484,7 @@ export default function HomePage() {
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Kawasan Minat</label>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Area of Interest</label>
                   <select
                     value={formArea}
                     onChange={(e) => setFormArea(e.target.value)}
@@ -494,47 +494,47 @@ export default function HomePage() {
                     <option value="Menteng">Menteng</option>
                     <option value="Cigadung & Dago Bandung">Cigadung &amp; Dago Bandung</option>
                     <option value="Bintaro & BSD">Bintaro &amp; BSD</option>
-                    <option value="Kawasan Lainnya">Kawasan Lainnya di Jabodetabek</option>
+                    <option value="Other Greater Jakarta Areas">Other Greater Jakarta Areas</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Rentang Budget</label>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Budget Range</label>
                   <select
                     value={formBudget}
                     onChange={(e) => setFormBudget(e.target.value)}
                     className="w-full border-b border-[#14130F]/20 bg-transparent py-2.5 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none"
                   >
-                    <option value="Rp5–10 M">Rp5 – 10 Miliar</option>
-                    <option value="Rp10–20 M">Rp10 – 20 Miliar</option>
-                    <option value="Rp20–35 M">Rp20 – 35 Miliar</option>
-                    <option value="di atas Rp35 M">di atas Rp35 Miliar</option>
+                    <option value="Rp5–10 B">Rp5 – 10 Billion</option>
+                    <option value="Rp10–20 B">Rp10 – 20 Billion</option>
+                    <option value="Rp20–35 B">Rp20 – 35 Billion</option>
+                    <option value="above Rp35 B">Above Rp35 Billion</option>
                   </select>
                 </div>
               </div>
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Kamar Tidur</label>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Bedrooms</label>
                   <select
                     value={formBeds}
                     onChange={(e) => setFormBeds(e.target.value)}
                     className="w-full border-b border-[#14130F]/20 bg-transparent py-2.5 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none"
                   >
-                    <option value="3+ Kamar">3+ Kamar Tidur</option>
-                    <option value="4+ Kamar">4+ Kamar Tidur</option>
-                    <option value="5+ Kamar">5+ Kamar Tidur</option>
+                    <option value="3+ Bedrooms">3+ Bedrooms</option>
+                    <option value="4+ Bedrooms">4+ Bedrooms</option>
+                    <option value="5+ Bedrooms">5+ Bedrooms</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Target Pindah</label>
+                  <label className="block text-xs uppercase tracking-wider text-[#6D675D] mb-2">Move-in Target</label>
                   <select
                     value={formTarget}
                     onChange={(e) => setFormTarget(e.target.value)}
                     className="w-full border-b border-[#14130F]/20 bg-transparent py-2.5 text-sm text-[#14130F] focus:border-[#14130F] focus:outline-none"
                   >
-                    <option value="Segera (1–3 Bulan)">Segera (1–3 Bulan)</option>
-                    <option value="3–6 Bulan">3–6 Bulan ke depan</option>
-                    <option value="Eksplorasi Santai">Eksplorasi Santai / Investasi</option>
+                    <option value="Soon (1–3 Months)">Soon (1–3 Months)</option>
+                    <option value="3–6 Months">3–6 Months from now</option>
+                    <option value="Casual Exploration">Casual Exploration / Investment</option>
                   </select>
                 </div>
               </div>
@@ -543,13 +543,13 @@ export default function HomePage() {
                 type="submit"
                 className="w-full rounded-xl bg-[#12110E] py-4 text-xs font-semibold uppercase tracking-widest text-white transition-all hover:bg-[#A8814F] hover:shadow-lg"
               >
-                Kirim Kriteria ke Private Desk &rarr;
+                Send Criteria to Private Desk &rarr;
               </button>
 
               <p className="text-[11px] text-[#6D675D] text-center">
-                Data Anda hanya dipakai untuk mencarikan rumah dan tidak pernah dibagikan ke pihak lain.{' '}
+                Your data is used only to help us find you a home and is never shared with any third party.{' '}
                 <Link href="/privasi" className="underline hover:text-[#14130F]">
-                  Kebijakan Privasi
+                  Privacy Policy
                 </Link>
                 .
               </p>

@@ -61,7 +61,7 @@ export default function Header() {
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-[#12110E]/95 text-[#F4F1EC] backdrop-blur-xl py-4 shadow-lg shadow-black/10'
+            ? 'bg-[#12110E]/95 text-[#F4F1EC] backdrop-blur-md py-4 shadow-lg shadow-black/10'
             : isLightHeader
             ? 'bg-transparent text-[#14130F] py-6'
             : 'bg-transparent text-[#F4F1EC] py-6'

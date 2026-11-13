@@ -1,36 +1,24 @@
-'use client';
-
 import React from 'react';
-import { motion } from 'motion/react';
 
 interface FadeInViewProps {
   children: React.ReactNode;
   delay?: number;
-  duration?: number;
-  y?: number;
   className?: string;
 }
 
-export default function FadeInView({
-  children,
-  delay = 0,
-  duration = 0.7,
-  y = 20,
-  className = '',
-}: FadeInViewProps) {
+/**
+ * Reveals children on scroll using native CSS scroll-driven animation
+ * (animation-timeline: view()) - zero JS, runs on the compositor thread.
+ * No fallback for browsers without support: the reveal is purely decorative,
+ * so content is simply visible immediately there (progressive enhancement).
+ */
+export default function FadeInView({ children, delay = 0, className = '' }: FadeInViewProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{
-        duration,
-        delay,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={className}
+    <div
+      className={`reveal-on-scroll ${className}`}
+      style={delay ? { animationDelay: `${delay}s` } : undefined}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

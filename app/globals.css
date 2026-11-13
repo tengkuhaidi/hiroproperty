@@ -68,3 +68,21 @@ dialog::backdrop {
   overflow: hidden;
   overscroll-behavior: contain;
 }
+
+/* Scroll entry reveal (replaces Framer Motion whileInView - zero JS runtime, runs on compositor thread) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes reveal-in-view {
+      from {
+        opacity: 0;
+        translate: 0 20px;
+      }
+    }
+
+    .reveal-on-scroll {
+      animation: reveal-in-view 0.6s ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
