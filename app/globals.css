@@ -39,13 +39,23 @@
 }
 
 /* Custom scrollbar clean */
-::-webkit-scrollbar {
-  width: 6px;
+html {
+  --scrollbar-thumb: #333;
+  --scrollbar-track: #12110e;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
 }
-::-webkit-scrollbar-track {
-  background: #12110e;
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 3px;
+
+/* Legacy fallback for WebKit/Blink browsers that don't support scrollbar-color/-width */
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 3px;
+  }
 }
